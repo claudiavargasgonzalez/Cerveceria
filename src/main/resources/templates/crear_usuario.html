@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Registro de usuarios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand">Gestión de usuarios</a>
+        <!-- NavBar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/usuarios}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <br>
+    <div class="container">
+       <div class="row">        
+          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+               <h1 class="text-center">Registro de usuario</h1>
+               <div class="card-body">
+                  <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="POST">
+                  
+                    <!-- Nombre con validaciones -->
+                      <div class="form-group">
+                          <label>Nombre:</label>
+                          <input type="text" name="nombre" th:field="*{nombre}" class="form-control" 
+                          placeholder="Digite su nombre" minlength="2" maxlength="25" required>
+                          <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Apellido:</label>
+                          <input type="text" name="apellido" th:field="*{apellido}" class="form-control" 
+                          placeholder="Digite su apellido" minlength="2" maxlength="25" required>
+                          <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
+                      </div>
+
+                      <!-- DNI editable -->
+                      <div class="form-group">
+                          <label>DNI:</label>
+                          <input type="text" name="dni" th:field="*{dni}" class="form-control" placeholder="Digite su DNI" required>
+                      </div>
+                      
+                      <!-- Email opcional -->
+                      <div class="form-group">
+                          <label>Email:</label>
+                          <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Digite su email" required>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Rol:</label>
+                          <input type="text" name="rol" th:field="*{rol}" class="form-control" placeholder="Digite el rol del usuario" required>
+                      </div>
+
+                      <!-- Contraseña con validaciones -->
+                      <div class="form-group">
+                          <label>Contraseña:</label>
+                          <input type="password" name="contrasena" th:field="*{contrasena}" class="form-control" 
+                          placeholder="Digite su contraseña" minlength="8" maxlength="25" required>
+                          <small class="form-text text-muted">Mínimo 8, máximo 25 caracteres.</small>
+                      </div>
+
+                      <!-- Checkbox Activo por defecto marcado -->
+                      <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input" name="activo" th:field="*{activo}" checked>
+                          <label class="form-check-label">Activo</label>
+                      </div>
+                      
+                      <!-- Botones -->
+                      <div class="form-group text-center">
+                          <button class="btn btn-secondary" type="button" onclick="window.history.back();">Volver</button>
+                          <button class="btn btn-success" type="submit">Guardar</button>
+                      </div>
+
+                  </form>
+               </div>
+          </div>
+       </div>
+    </div>
+
+</body>
+</html>

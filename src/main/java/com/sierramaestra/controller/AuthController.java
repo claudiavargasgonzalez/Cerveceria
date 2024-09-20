@@ -20,12 +20,12 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestParam String email,@RequestParam String password, Model model) {
-		if(authService.authenticate(email, password)) {
+	public String login(@RequestParam String email,@RequestParam String contrasena, Model model) {
+		if(authService.authenticate(email, contrasena)) {
 			model.addAttribute("email", email);
-			return "homeWelcome";
+			return "menu-principal";
 		}else {
-			model.addAttribute("error", "invalid credentials");
+			model.addAttribute("error", "Credenciales invalidas");
 			return "login";
 		}
 		

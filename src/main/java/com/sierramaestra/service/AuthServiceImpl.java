@@ -4,19 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sierramaestra.model.Usuario;
-import com.sierramaestra.repository.UsuarioRepository;
+import com.sierramaestra.repository.UsuarioRepositorio;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioRepositorio usuarioRepository;
 
 	@Override
-	public boolean authenticate(String email, String password) {
+	public boolean authenticate(String email, String contrasena) {
 		Usuario usuario = usuarioRepository.findByEmail(email);
 		if(usuario != null) {
-			return usuario.getPassword().equals(password);
+			return usuario.getContrasena().equals(contrasena);
 		}
 		return false;
 	}
