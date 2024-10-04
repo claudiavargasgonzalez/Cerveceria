@@ -41,7 +41,7 @@
         <body class="bg-gray-100 bg-opacity-75">
             <div class="container mx-auto p-6 max-w-full">
                 <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
-                   <!--   <form action="/barril" method="get" id="filter-form">
+                   <form action="/barril" method="get" id="filter-form">
                         <div>
                             <h2>Filtrar por :</h2>
                             <select name="estado" onchange="document.getElementById('filter-form').submit();">
@@ -49,7 +49,7 @@
                                 <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}">Estado</option>
                             </select>
                         </div>
-                    </form>-->
+                    </form>
                     <h1 class="text-2xl font-bold mb-4">Listado de Barriles</h1>
                     <div class="flex flex-col sm:flex-row justify-between mb-4">
                         <a th:href="@{/barril/nuevo}"><button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Barril</button></a>

@@ -59,6 +59,12 @@
                           <label>Rol:</label>
                           <input type="text" name="rol" th:field="*{rol}" class="form-control" placeholder="Digite el rol del usuario" required>
                       </div>
+                      
+                      <div class="form-group">
+                          <label>Legajo:</label>
+                          <input type="text" name="legajo" th:field="*{legajo}" class="form-control" 
+                          placeholder="Digite su legajo" minlength="1" maxlength="4" required>
+                      </div>
 
                       <!-- Contraseña con validaciones -->
                       <div class="form-group">

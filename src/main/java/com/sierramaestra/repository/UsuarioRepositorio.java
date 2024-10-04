@@ -7,5 +7,5 @@ import com.sierramaestra.model.Usuario;
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     // Métodos personalizados pueden ser añadidos aquí si es necesario
-	Usuario findByEmail(String email);
+	Usuario findByLegajo(String legajo);
 }

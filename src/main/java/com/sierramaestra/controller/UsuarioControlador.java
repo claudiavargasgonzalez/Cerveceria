@@ -62,6 +62,7 @@ public class UsuarioControlador {
         usuarioExistente.setDni(usuario.getDni());
         usuarioExistente.setEmail(usuario.getEmail());
         usuarioExistente.setRol(usuario.getRol());
+        usuarioExistente.setLegajo(usuario.getLegajo());
         usuarioExistente.setContrasena(usuario.getContrasena());
         usuarioExistente.setActivo(usuario.isActivo());
 

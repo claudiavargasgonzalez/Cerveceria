@@ -29,6 +29,9 @@ public class Usuario {
 
     @Column(name = "rol", nullable = false, length = 50)
     private String rol;
+    
+    @Column(name = "legajo", nullable = false, length = 4)
+    private String legajo;
 
     @Column(name = "contrasena", nullable = false, length = 50)
     private String contrasena;
@@ -41,19 +44,32 @@ public class Usuario {
     }
 
     // Constuctor completo
-    public Usuario(Long id, String nombre, String apellido, String dni, String email, String rol, String contrasena,
-            boolean activo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.email = email;
-        this.rol = rol;
-        this.contrasena = contrasena;
-        this.activo = activo;
-    }
+  
+    public Usuario(Long id, String nombre, String apellido, String dni, String email, String rol, String legajo,
+			String contrasena, boolean activo) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.email = email;
+		this.rol = rol;
+		this.legajo = legajo;
+		this.contrasena = contrasena;
+		this.activo = activo;
+	}
+    
 
-    public Long getId() {
+    public String getLegajo() {
+		return legajo;
+	}
+
+
+	public void setLegajo(String legajo) {
+		this.legajo = legajo;
+	}
+
+	public Long getId() {
         return id;
     }
 
