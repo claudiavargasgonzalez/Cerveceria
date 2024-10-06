@@ -1,0 +1,29 @@
+/* Estilo para el título principal */
+h1 {
+    font-size: 2.5rem; /* Tamaño del título principal */
+    margin-top: 2rem; /* Espacio arriba del título */
+    margin-bottom: 1.5rem; /* Espacio debajo del título */
+    text-align: center; /* Centrar el título */
+    margin-top: 9rem;
+}
+
+/* Estilo para el subtítulo */
+h2 {
+    font-size: 24px; /* Tamaño de título más grande */
+    margin: 0 20px; /* Espaciado entre logo y título */
+}
+
+/* Estilo para el botón de agregar */
+.btn-agregar {
+    margin-top: 0.5rem;
+}
+
+.table {
+    width: 100%; /* Cambiar a un valor más grande */
+    margin: auto; /* Centrar la tabla */
+}
+
+/* Estilo para centrar el texto en la tabla */
+.table th, .table td {
+    text-align: center; /* Centrar el texto en la tabla */
+}

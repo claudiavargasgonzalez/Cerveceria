@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Registro de usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/crear_usuario.css">
 </head>
 
 <body>
@@ -22,68 +23,88 @@
     
     <br>
     <div class="container">
-       <div class="row">        
-          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-               <h1 class="text-center">Registro de usuario</h1>
-               <div class="card-body">
-                  <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="POST">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Registro de usuario</h1>
+            <div class="card-body">
+                <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="POST">
+
+                <!-- Campo Legajo con validaciones -->
+                <div class="form-group">
+                        <label for="legajo">Legajo:</label>
+                        <input type="text" name="legajo" th:field="*{legajo}" class="form-control"
+                        placeholder="Digite su legajo" minlength="2" maxlength="25" required>
+                        <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
+                    </div>
                   
-                    <!-- Nombre con validaciones -->
-                      <div class="form-group">
-                          <label>Nombre:</label>
-                          <input type="text" name="nombre" th:field="*{nombre}" class="form-control" 
-                          placeholder="Digite su nombre" minlength="2" maxlength="25" required>
-                          <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
-                      </div>
+                    <!-- Campo Nombre con validaciones -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" th:field="*{nombre}" class="form-control"
+                        placeholder="Digite su nombre" pattern="[A-Za-z]+" maxlength="20" required>
+                        <small class="form-text text-muted">Solo letras permitidas (máximo 20 caracteres)</small>
+                    </div>
 
-                      <div class="form-group">
-                          <label>Apellido:</label>
-                          <input type="text" name="apellido" th:field="*{apellido}" class="form-control" 
-                          placeholder="Digite su apellido" minlength="2" maxlength="25" required>
-                          <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
-                      </div>
+                    <!-- Campo Apellido con validaciones -->
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" th:field="*{apellido}" class="form-control" 
+                        placeholder="Digite su apellido" pattern="[A-Za-z\s]+" maxlength="20" required>
+                        <small class="form-text text-muted">Solo letras y espacios permitidos (máximo 20 caracteres)</small>
+                    </div>
 
-                      <!-- DNI editable -->
-                      <div class="form-group">
-                          <label>DNI:</label>
-                          <input type="text" name="dni" th:field="*{dni}" class="form-control" placeholder="Digite su DNI" required>
-                      </div>
-                      
-                      <!-- Email opcional -->
-                      <div class="form-group">
-                          <label>Email:</label>
-                          <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Digite su email" required>
-                      </div>
+                    <!-- Campo DNI -->
+                    <div class="form-group">
+                        <label for="dni">DNI:</label>
+                        <input type="text" name="dni" th:field="*{dni}" class="form-control" 
+                        placeholder="Digite su DNI" pattern="\d{8}" maxlength="8" required>
+                        <small class="form-text text-muted">Debe tener exactamente 8 dígitos numéricos</small>
+                    </div>
+ 
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" th:field="*{email}" class="form-control" 
+                        placeholder="Digite su email" maxlength="50" required>
+                        <small class="form-text text-muted">Debe ser una dirección de email válida (máximo 50 caracteres)</small>
+                    </div>
 
-                      <div class="form-group">
-                          <label>Rol:</label>
-                          <input type="text" name="rol" th:field="*{rol}" class="form-control" placeholder="Digite el rol del usuario" required>
-                      </div>
 
-                      <!-- Contraseña con validaciones -->
-                      <div class="form-group">
-                          <label>Contraseña:</label>
-                          <input type="password" name="contrasena" th:field="*{contrasena}" class="form-control" 
-                          placeholder="Digite su contraseña" minlength="8" maxlength="25" required>
-                          <small class="form-text text-muted">Mínimo 8, máximo 25 caracteres.</small>
-                      </div>
+                    <!-- Campo Rol -->
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <select name="rol" th:field="*{rol}" class="form-control" required>
+                            <option value="administrador">Administrador</option>
+                            <option value="empleado">Encargado</option>
+                            <option value="empleado">Empleado</option>
+                            <option value="empleado">Repartidor</option>
+                        </select>
+                    </div>
 
-                      <!-- Checkbox Activo por defecto marcado -->
-                      <div class="form-group form-check">
-                          <input type="checkbox" class="form-check-input" name="activo" th:field="*{activo}" checked>
-                          <label class="form-check-label">Activo</label>
-                      </div>
-                      
-                      <!-- Botones -->
-                      <div class="form-group text-center">
-                          <button class="btn btn-secondary" type="button" onclick="window.history.back();">Volver</button>
-                          <button class="btn btn-success" type="submit">Guardar</button>
-                      </div>
+                    <!-- Campo Contraseña con validaciones -->
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena" th:field="*{contrasena}" class="form-control" 
+                        placeholder="Digite su contraseña" minlength="8" maxlength="25" required>
+                        <small class="form-text text-muted">Mínimo 8, máximo 25 caracteres</small>
+                    </div>
 
-                  </form>
-               </div>
-          </div>
-       </div>
+                    <!-- Checkbox Activo sin marcar por defecto -->
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="activo" th:field="*{activo}">
+                        <label for="activo" class="form-check-label">Activo</label>
+                    </div>
+                   
+                    <!-- Botones -->
+                    <div class="form-group text-center">
+                        <button class="btn btn-secondary" type="button" onclick="window.history.back();">Volver</button>
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
     </div>
 
 </body>

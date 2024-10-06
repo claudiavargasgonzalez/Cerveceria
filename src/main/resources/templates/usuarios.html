@@ -1,85 +1,116 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="utf-8">
     <title>Listado de Usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/menu-principal.css">
+    <link rel="stylesheet" href="/css/usuarios.css">
     <!-- Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-    <style>
-        .btn-agregar {
-            padding: 10px 20px; /* Ajusta el tamaño del botón */
-            font-size: 1em;   /* Tamaño de texto ligeramente más grande */
-        }
-    </style>
-
-
 <body>
 
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <a class="navbar-brand">Gestión de usuarios</a>
-         <a href="/menu-principal"
-			class="flex items-center justify-center rounded-full p-2 hover:bg-gray-700">
-			<i class="fa-solid fa-house text-2xl"></i>
-		</a>
-		<!-- NavBar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                 <a class="nav-link" th:href="@{/usuarios}"></a>
-                </li>
-            </ul>
+    <header>
+        <div class="logo">
+            <a><img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra"></a>
         </div>
-    </nav>
+        <h2 ><a href="/menu-principal">Menú Principal</a></h2>
+        <nav>
+            <ul class="menu">
+                <li><a href="#">Cerveza</a></li>
+                <li><a href="#">Cliente</a></li>
+                <li><a href="#">Equipamiento</a></li>
+                <li><a href="#">Lote</a></li>
+                <li><a href="#">Pedidos</a></li>
+                <li><a href="#">Stock</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="col text-center">
+            <h1>Lista de usuarios</h1>
+        </div>
+        <br>
 
-   <div class="container">
-       <div class="row">
-         <h1>Lista de usuarios</h1>
-       </div>
-       <br>
-       <div class="row">
-          <div class="col-lg-3">
-             <a th:href="@{/usuarios/nuevo}" class="btn btn-primary btn-agregar mb-3">Agregar usuario</a>
-          </div>
-       </div>
-       <br>
-       <table class="table table-striped table-bordered">
+        <!-- Fila para el botón de agregar y el buscador -->
+        <div class="row mb-3">
+            <div class="col-lg-3">
+                <a th:href="@{/usuarios/nuevo}" class="btn btn-primary">Agregar usuario</a>
+            </div>
+            <div class="col-lg-9">
+                <form action="#" th:action="@{/usuarios}" method="get" class="form-inline justify-content-end">
+                    <input type="text" th:name="legajo" th:value="${legajo}" placeholder="Buscar por Legajo" class="form-control mb-2 mr-2" />
+                    <button type="submit" class="btn btn-secondary mb-2">Buscar</button>
+                </form>
+            </div>
+        </div>
+        
+        <br>
+
+        <!-- Tabla de usuarios -->
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                   <th>Id</th>
-                   <th>Nombre</th>
-                   <th>Apellido</th>
-                   <th>Dni</th>
-                   <th>Email</th>
-                   <th>Rol</th>
-                   <th>Estado</th>
-                   <th>Acciones</th>
+                    <th>Id</th>
+                    <th>Legajo</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="usuario : ${usuarios}">
-                   <td th:text="${usuario.id}">Id</td>
-                   <td th:text="${usuario.nombre}">Nombre</td>
-                   <td th:text="${usuario.apellido}">Apellido</td>
-                   <td th:text="${usuario.dni}">Dni</td>
-                   <td th:text="${usuario.email}">Email</td>
-                   <td th:text="${usuario.rol}">Rol</td>
-                   <td th:text="${usuario.getEstadoActivo}">Estado</td>
-                   <td>
-                      <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-info btn-sm">
-                         <i class="fas fa-edit"></i> <!-- Icono de editar -->
-                      </a>
-                      <a th:href="@{/usuarios/{id}(id=${usuario.id})}" class="btn btn-danger btn-sm">
-                         <i class="fas fa-trash-alt"></i> <!-- Icono de eliminar -->
-                      </a>
-                   </td>
+                    <td th:text="${usuario.id}">Id</td>
+                    <td th:text="${usuario.legajo}">Legajo</td>
+                    <td th:text="${usuario.nombre}">Nombre</td>
+                    <td th:text="${usuario.apellido}">Apellido</td>
+                    <td th:text="${usuario.dni}">DNI</td>
+                    <td th:text="${usuario.email}">Email</td>
+                    <td th:text="${usuario.rol}">Rol</td>
+                    <td th:text="${usuario.activo ? 'Activo' : 'Inactivo'}">Estado</td>
+                    <td>
+                        <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-info btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/usuarios/{id}(id=${usuario.id})}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
 
+        <!-- Paginador -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/usuarios(page=${currentPage - 1}, legajo=${legajo})}">Anterior</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a class="page-link" th:classappend="${i == currentPage} ? 'active'"
+                    th:href="@{/usuarios(page=${i}, legajo=${legajo})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/usuarios(page=${currentPage + 1}, legajo=${legajo})}">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <script src="/js/menu-principal.js"></script>
 </body>
 </html>
 

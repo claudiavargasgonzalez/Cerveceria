@@ -18,11 +18,29 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio servicio;
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
     @GetMapping("/usuarios")
-    public String listarUsuarios(Model model) {
-        model.addAttribute("usuarios", servicio.listarTodosLosUsuarios());
-        return "usuarios"; // nos retorna al archivo usuarios
+    public String listarUsuarios(@RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(required = false) String legajo,
+                                 Model model) {
+        int pageSize = 10; // Tamaño de página
+        long totalUsuarios = servicio.contarUsuarios(legajo);
+        int totalPages = (int) Math.ceil((double) totalUsuarios / pageSize);
+        
+        List<Usuario> usuarios = servicio.listarUsuarios(page, pageSize, legajo);
+        
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("legajo", legajo);
+        
+        return "usuarios"; // Nombre de la vista
     }
+    
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     @GetMapping("/usuarios/nuevo")
     public String crearUsuarioFormulario(Model model) {
@@ -31,21 +49,23 @@ public class UsuarioControlador {
         return "crear_usuario";
     }
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
     @PostMapping("/usuarios/guardar")
     public String guardarUsuario(@ModelAttribute Usuario usuario, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "crear_usuario";
         }
-
-        // Asigna un valor predeterminado si el campo 'activo' no está definido
-        if (!usuario.isActivo()) {
-            usuario.setActivo(true); // Establece un valor predeterminado, por ejemplo 'true'
-        }
-
+    
+        // Aquí se confía en el valor recibido desde el formulario, sin cambiar el estado de 'activo'.
         servicio.guardarUsuario(usuario);
-
+    
         return "redirect:/usuarios";
     }
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     @GetMapping("/usuarios/editar/{id}")
     public String mostrarFormularioDeEditar(@PathVariable Long id, Model model) {
@@ -53,10 +73,14 @@ public class UsuarioControlador {
         return "editar_usuario";
     }
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
     @PostMapping("/usuarios/{id}")
     public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("usuario") Usuario usuario, Model model) {
         Usuario usuarioExistente = servicio.obtenerUsuarioPorId(id);
         usuarioExistente.setId(id);
+        usuarioExistente.setLegajo(usuario.getLegajo());
         usuarioExistente.setNombre(usuario.getNombre());
         usuarioExistente.setApellido(usuario.getApellido());
         usuarioExistente.setDni(usuario.getDni());
@@ -69,11 +93,17 @@ public class UsuarioControlador {
         return "redirect:/usuarios";
     }
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
     @GetMapping("/usuarios/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         servicio.eliminarUsuario(id);
         return "redirect:/usuarios";
     }
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
     // Nuevo método para mostrar el menú principal
     @GetMapping("/menu-principal")
