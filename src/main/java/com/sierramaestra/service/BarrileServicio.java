@@ -2,10 +2,10 @@ package com.sierramaestra.service;
 
 import java.util.List;
 
-import com.sierramaestra.model.*;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.sierramaestra.model.Barril;
 
 public interface BarrileServicio {
     List<Barril> listarTodosLosBarriles();
@@ -17,10 +17,10 @@ public interface BarrileServicio {
     Barril actualizarBarril(Barril barril);
     
     void eliminarBarril(Long id);
-
-    List<Barril> listarBarrilesPorEstado(String estado);
     
     Page<Barril> listarTodosLosBarriles(Pageable pageable);
-    
+
     Page<Barril> listarBarrilesPorEstado(String estado, Pageable pageable);
+
+	List<Barril> listarBarrilesPorEstado(String estado);
 }

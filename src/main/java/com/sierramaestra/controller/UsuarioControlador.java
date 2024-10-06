@@ -1,5 +1,7 @@
 package com.sierramaestra.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sierramaestra.model.Usuario;
 import com.sierramaestra.service.UsuarioServicio;
@@ -86,6 +89,7 @@ public class UsuarioControlador {
         usuarioExistente.setDni(usuario.getDni());
         usuarioExistente.setEmail(usuario.getEmail());
         usuarioExistente.setRol(usuario.getRol());
+        usuarioExistente.setLegajo(usuario.getLegajo());
         usuarioExistente.setContrasena(usuario.getContrasena());
         usuarioExistente.setActivo(usuario.isActivo());
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Listado de Lotes</title>
+</head>
+<body>
+    <h1>Listado de Lotes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cerveza</th>
+                <th>Cantidad Litros</th>
+                <th>Estado</th>
+                <th>Notas</th>
+                <th>Fecha Carga</th>
+                <th>Fecha Vencimiento</th>
+                <th>Lista de barriles</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="lote : ${lotes}">
+                <td th:text="${lote.id}"></td>
+                <td th:text="${lote.cerveza}"></td>
+                <td th:text="${lote.cantidadLitros}"></td>
+                <td th:text="${lote.estado}"></td>
+                <td th:text="${lote.notas}"></td>
+                <td th:text="${#dates.format(lote.fechaCarga, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#dates.format(lote.fechaVencimiento, 'yyyy-MM-dd')}"></td>
+                <td th:text="${lote.barriles}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
