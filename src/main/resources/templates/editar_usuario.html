@@ -32,8 +32,8 @@
                 <div class="form-group">
                         <label for="legajo">Legajo:</label>
                         <input type="text" name="legajo" th:field="*{legajo}" class="form-control"
-                        placeholder="Digite su legajo" minlength="2" maxlength="25" required>
-                        <small class="form-text text-muted">Mínimo 2, máximo 25 caracteres.</small>
+                        placeholder="Digite su legajo" pattern="^\d{1,3}$" required>
+                        <small class="form-text text-muted">Ingrese su legajo, máximo hasta 3 dígitos</small>
                     </div>
                   
                     <!-- Campo Nombre con validaciones -->
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label for="dni">DNI:</label>
                         <input type="text" name="dni" th:field="*{dni}" class="form-control" 
-                        placeholder="Digite su DNI" pattern="\d{8}" maxlength="8" required>
+                        placeholder="Digite su DNI" pattern="^\d{8}$" maxlength="8" required>
                         <small class="form-text text-muted">Debe tener exactamente 8 dígitos numéricos</small>
                     </div>
  
