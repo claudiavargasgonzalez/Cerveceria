@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.sierramaestra.model.Barril;
 import com.sierramaestra.repository.BarrilRepositorio;
 
-@Service
-public class BarrilServicioImlp implements BarrileServicio{
+@Service("barrilServicioImlp") 
+public class BarrilServicioImlp implements BarrileServicio {
 
     @Autowired
     private BarrilRepositorio repositorio;
@@ -46,7 +46,7 @@ public class BarrilServicioImlp implements BarrileServicio{
         return repositorio.findByEstado(estado);
     }
     
-   @Override
+    @Override
     public Page<Barril> listarTodosLosBarriles(Pageable pageable) {
         return repositorio.findAll(pageable);
     }
@@ -55,8 +55,12 @@ public class BarrilServicioImlp implements BarrileServicio{
     public Page<Barril> listarBarrilesPorEstado(String estado, Pageable pageable) {
         return repositorio.findByEstado(estado, pageable);
     }
-
-	
-
-	
+    
+    @Autowired
+    private BarrilRepositorio barrilRepositorio;	
+    
+    @Override
+    public List<Barril> listarBarrilesPorEstadoLimpio() {
+        return barrilRepositorio.findByEstado("Limpio");
+    }
 }
