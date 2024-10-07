@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Registro de Lote</title>
+    <title>Editar Lote</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -16,53 +16,38 @@
 <body class="bg-gray-100 bg-opacity-75">
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
-            <h1 class="text-2xl font-bold text-center mb-6">Registro de Lote</h1>
-            <form action="#" th:action="@{/lote}" th:object="${lote}" method="post">
-                <!-- Cerveza -->
+            <h1 class="text-2xl font-bold text-center mb-6">Editar Lote</h1>
+            <form action="#" th:action="@{/lote/editarLote/{id}(id=${lote.id})}" th:object="${lote}" method="post">
                 <div class="mb-4">
                     <label for="cerveza" class="block text-sm font-medium text-gray-700">Cerveza:</label>
                     <input type="text" id="cerveza" th:field="*{cerveza}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" placeholder="Nombre de la cerveza" required>
                 </div>
-
-                <!-- Cantidad Litros -->
                 <div class="mb-4">
                     <label for="cantidadLitros" class="block text-sm font-medium text-gray-700">Cantidad de Litros:</label>
-                    <input type="number" id="cantidadLitros" th:field="*{cantidadLitros}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" placeholder="Cantidad en litros" required>
+                    <input type="number" id="cantidadLitros" th:field="*{cantidadLitros}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" placeholder="Cantidad de litros" required>
                 </div>
-
-                <!-- Estado -->
                 <div class="mb-4">
                     <label for="estado" class="block text-sm font-medium text-gray-700">Estado:</label>
                     <select id="estado" th:field="*{estado}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" required>
                         <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}">Estado</option>
                     </select>
                 </div>
-
-                <!-- Notas -->
                 <div class="mb-4">
                     <label for="notas" class="block text-sm font-medium text-gray-700">Notas:</label>
-                    <textarea id="notas" th:field="*{notas}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 lg:text-lg" placeholder="Notas adicionales" maxlength="254" style="resize: none;"></textarea>
+                    <textarea id="notas" th:field="*{notas}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 lg:text-lg" placeholder="Notas sobre el lote" maxlength="254" style="resize: none;"></textarea>
                 </div>
-
-                <!-- Fecha de Carga -->
                 <div class="mb-4">
-					<label for="fechaCarga">Fecha de Carga:</label>
-					<input type="date" id="fechaCarga" th:field="*{fechaCarga}" required>
+                    <label for="fechaCarga" class="block text-sm font-medium text-gray-700">Fecha de Carga:</label>
+                    <input type="date" id="fechaCarga" th:field="*{fechaCarga}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" required>
                 </div>
-
-                <!-- Fecha de Vencimiento -->
                 <div class="mb-4">
-					<label for="fechaVencimiento">Fecha de Vencimiento:</label>
-					<input type="date" id="fechaVencimiento" th:field="*{fechaVencimiento}" required>
+                    <label for="fechaVencimiento" class="block text-sm font-medium text-gray-700">Fecha de Vencimiento:</label>
+                    <input type="date" id="fechaVencimiento" th:field="*{fechaVencimiento}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" required>
                 </div>
-
-                <!-- Barriles Limpios -->
                 <div class="mb-4">
-                    <label for="fechaCargaMadurador" class="block text-sm font-medium text-gray-700">Fecha carga madurador:</label>
-					<input type="date" id="fechaCargaMadurador" th:field="*{fechaCargaMadurador}" required>
+                    <label for="fechaCargaMadurador" class="block text-sm font-medium text-gray-700">Fecha de Carga en Madurador:</label>
+                    <input type="date" id="fechaCargaMadurador" th:field="*{fechaCargaMadurador}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" required>
                 </div>
-
-                <!-- Botones -->
                 <div class="flex justify-between">
                     <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Guardar</button>
                     <a href="/lote" class="bg-red-500 text-white px-4 py-2 rounded-lg text-center hover:bg-red-600">Cancelar</a>

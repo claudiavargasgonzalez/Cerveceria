@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Listado de Lotes</title>
+    <title>Listado de Barriles</title>
     <link rel="stylesheet" href="/css/menu-principal.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,7 +31,7 @@
             <ul class="menu">
                 <li><a href="#">Cerveza</a></li>
                 <li><a href="#">Cliente</a></li>
-                <li><a href="/barril">Barril</a></li>
+                <li><a href="/lote">Lote</a></li>
                 <li><a href="#">Pedidos</a></li>
                 <li><a href="#">Stock</a></li>
                 <li><a href="/usuarios">Usuarios</a></li>
@@ -48,56 +48,58 @@
     <!-- Contenido principal de la página -->
     <div class="container mx-auto p-6 max-w-full mt-12">
         <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
-            <h1 class="text-2xl font-bold mb-4">Listado de Lotes</h1>
+            <h1 class="text-2xl font-bold mb-4">Listado de Barriles</h1>
             <div class="flex flex-col sm:flex-row justify-between mb-4">
-                <a th:href="@{/lote/nuevo}">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Lote</button>
+                <a th:href="@{/barril/nuevo}">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Barril</button>
                 </a>
             </div>
             <table class="w-full bg-white rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-200 text-left text-xs sm:text-base">
                         <th class="p-4">ID</th>
-                        <th class="p-4">Cerveza</th>
-                        <th class="p-4">Cantidad Litros</th>
+                        <th class="p-4">Litros</th>
                         <th class="p-4">Estado</th>
                         <th class="p-4">Notas</th>
-                        <th class="p-4">Fecha Carga</th>
-                        <th class="p-4">Fecha Vencimiento</th>
-						<th class="p-4">Fecha carga Madurador</th>
                         <th class="p-4">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="lote : ${lotes}" class="border-b text-sm sm:text-base">
-                        <td th:text="${lote.id}" class="p-4">1</td>
-                        <td th:text="${lote.cerveza}" class="p-4">Cerveza Ejemplo</td>
-                        <td th:text="${lote.cantidadLitros}" class="p-4">500</td>
-                        <td th:text="${lote.estado}" class="p-4">Activo</td>
-                        <td th:text="${lote.notas}" class="p-4">Notas del Lote</td>
-                        <td th:text="${#dates.format(lote.fechaCarga, 'yyyy-MM-dd')}" class="p-4">2024-10-05</td>
-                        <td th:text="${#dates.format(lote.fechaVencimiento, 'yyyy-MM-dd')}" class="p-4">2025-10-05</td>
-						<td th:text="${#dates.format(lote.fechaCargaMadurador, 'yyyy-MM-dd')}" class="p-4">2025-10-05</td>
+                    <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
+                        <td th:text="${barril.id}" class="p-4">1</td>
+                        <td th:text="${barril.litros}" class="p-4">123</td>
+                        <td th:text="${barril.estado}" class="p-4">456456</td>
+                        <td th:text="${barril.notas}" class="p-4">Cerveza</td>
                         <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
-                            <a th:href="@{/lote/{id}(id=${lote.id})}">
+                            <a th:href="@{/barril/showBarril/{id}(id=${barril.id})}">
                                 <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button>
                             </a>
-							<a th:href="@{/lote/editarLote/{id}(id=${lote.id})}">
-							    <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
-							</a>
+                            <a th:href="@{/barril/editarBarril/{id}(id=${barril.id})}">
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
+                            </a>
+                            <a th:href="@{/barril/{id}(id=${barril.id})}">
+                                <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-			<div class="flex justify-between mt-4">
-			    <div>
-			        <span>Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span></span>
-			    </div>
-			    <div>
-			        <a th:href="@{/lote(page=${currentPage - 1})}" th:if="${currentPage > 0}" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Anterior</a>
-			        <a th:href="@{/lote(page=${currentPage + 1})}" th:if="${currentPage < totalPages - 1}" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Siguiente</a>
-			    </div>
-			</div>
+
+            <div class="mt-4 flex justify-between">
+                <div th:if="${barrilesPage.hasPrevious()}">
+                    <a th:href="@{/barril(page=${barrilesPage.number - 1}, estado=${param.estado})}">
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
+                    </a>
+                </div>
+                <div th:if="${barrilesPage.hasNext()}">
+                    <a th:href="@{/barril(page=${barrilesPage.number + 1}, estado=${param.estado})}">
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    Página <span th:text="${barrilesPage.number + 1}">1</span> de <span th:text="${barrilesPage.totalPages}">1</span>
+                </div>
+            </div>
         </div>
     </div>
 
