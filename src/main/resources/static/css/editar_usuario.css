@@ -1,0 +1,11 @@
+h1 {
+    margin-top: 2rem; /* Espacio superior para el título */
+    margin-bottom: 1.5rem; /* Espacio inferior para el título */
+    font-size: 2rem; /* Tamaño de fuente igual a "Lista de usuarios" */
+}
+.form-group {
+    margin-bottom: 1rem; /* Espacio entre los campos del formulario */
+}
+.btn {
+    margin: 0.5rem; /* Espacio entre botones */
+}

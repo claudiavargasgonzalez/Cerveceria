@@ -1,17 +1,16 @@
 package com.sierramaestra.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.sierramaestra.model.Barril;
 import com.sierramaestra.repository.BarrilRepositorio;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-@Service
+@Service("barrilServicioImlp") 
 public class BarrilServicioImlp implements BarrileServicio {
 
     @Autowired
@@ -55,5 +54,13 @@ public class BarrilServicioImlp implements BarrileServicio {
     @Override
     public Page<Barril> listarBarrilesPorEstado(String estado, Pageable pageable) {
         return repositorio.findByEstado(estado, pageable);
+    }
+    
+    @Autowired
+    private BarrilRepositorio barrilRepositorio;	
+    
+    @Override
+    public List<Barril> listarBarrilesPorEstadoLimpio() {
+        return barrilRepositorio.findByEstado("Limpio");
     }
 }
