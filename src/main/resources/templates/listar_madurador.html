@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Mi Página</title>
+</head>
+<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard de Administración</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <style>
+            body {
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        </style>
+    </head>
+    
+    <div class="flex">
+        <aside class="flex h-screen w-20 flex-col items-center bg-gray-800 text-white">
+            <div class="my-6">
+                <i id="menu-button" class="fas fa-bars text-3xl cursor-pointer"></i>
+            </div>
+
+            <nav id="dropdown-menu" class="dropdown mt-10 flex flex-col space-y-8">
+                <a href="/menu-principal" class="flex items-center justify-center rounded-full p-2 hover:bg-gray-700">
+                    <i class="fa-solid fa-house text-2xl"></i>
+                </a>
+                <a href="/barril" class="flex items-center justify-center rounded-full p-2 hover:bg-gray-700">
+                    <i class="fas fa-beer-mug-empty text-2xl"></i>
+                </a>
+            </nav>
+        </aside>
+
+        <body class="bg-gray-100 bg-opacity-75">
+            <div class="container mx-auto p-6 max-w-full">
+                <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
+                   <form action="/madurador" method="get" id="filter-form">
+                        <div>
+                            <h2>Filtrar por :</h2>
+                            <select name="estado" onchange="document.getElementById('filter-form').submit();">
+                                <option value="">Todos los estados</option>
+                                <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}">Estado</option>
+                            </select>
+                        </div>
+                    </form>
+                    <h1 class="text-2xl font-bold mb-4">Listado de Madurador</h1>
+                    <div class="flex flex-col sm:flex-row justify-between mb-4">
+                        <a th:href="@{/madurador/nuevo}"><button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Madurador</button></a>
+                    </div>
+                    <table class="w-full bg-white rounded-lg shadow-md">	
+                        <thead>
+                            <tr class="bg-gray-200 text-left text-xs sm:text-base">
+                                <th class="p-4">ID</th>
+                                <th class="p-4">Litros</th>
+                                <th class="p-4">Estado</th>
+                                <th class="p-4">Notas</th>
+                                <th class="p-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
+                                <td th:text="${madurador.id}" class="p-4">1</td>
+                                <td th:text="${madurador.litros}" class="p-4">123</td>
+                                <td th:text="${madurador.estado}" class="p-4">456456</td>
+                                <td th:text="${madurador.notas}" class="p-4">Cerveza</td>
+                                <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2">
+                                    <a th:href="@{/madurador/showMadurador/{id}(id=${madurador.id})}"><button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button></a>
+                                    <a th:href="@{/madurador/editarMadurador/{id}(id=${madurador.id})}"><button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button></a>
+                                    <a th:href="@{/madurador/{id}(id=${madurador.id})}" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4">
+                        <div th:if="${maduradorPage.hasPrevious()}">
+                            <a th:href="@{/madurador(page=${maduradorPage.number - 1}, estado=${param.estado})}">
+                                <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
+                            </a>
+                        </div>
+                        <div th:if="${maduradorPage.hasNext()}">
+                            <a th:href="@{/madurador(page=${maduradorPage.number + 1}, estado=${param.estado})}">
+                                <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            Página <span th:text="${maduradorPage.number + 1}">1</span> de <span th:text="${maduradorPage.totalPages}">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+</body>
+</html>
