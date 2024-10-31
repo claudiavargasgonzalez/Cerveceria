@@ -31,9 +31,18 @@
             <ul class="menu">
                 <li><a href="/cervezas">Cerveza</a></li>
                 <li><a href="#">Cliente</a></li>
-                <li><a href="/barril">Barril</a></li>
                 <li><a href="#">Pedidos</a></li>
-                <li><a href="#">Stock</a></li>
+                 <!-- Dropdown Stock -->
+				        <li class="relative group">
+				            <a href="#" class="items-center">Stock</a>
+				            <!-- Submenú desplegable -->
+				            <ul
+				                class="absolute hidden group-hover:block bg-black shadow-lg rounded-md mt-1 w-32 py-2">
+				                <li><a href="/barril" class="block px-4 py-2 hover:bg-gray-200">Barril</a></li>
+				                <li><a href="/lote" class="block px-4 py-2 hover:bg-gray-200">Lote</a></li>
+				            </ul>
+				        </li>
+               
                 <li><a href="/usuarios">Usuarios</a></li>
                 <li><a href="/login">Cerrar Sesión</a></li>
             </ul>
@@ -54,6 +63,14 @@
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Lote</button>
                 </a>
             </div>
+            <div class="flex justify-between mb-4">				    
+				    <!-- Formulario de filtro por ID -->
+				    <form th:action="@{/lote/buscar}" method="get" class="flex items-center space-x-2">
+				        <input type="number" name="id" placeholder="Buscar por ID" class="px-2 py-1 border rounded-lg" required>
+				        <button type="submit" class="bg-green-500 text-white px-4 py-1 rounded-lg hover:bg-green-600">Buscar</button>
+				    </form>
+				</div>
+            
             <table class="w-full bg-white rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-200 text-left text-xs sm:text-base">
