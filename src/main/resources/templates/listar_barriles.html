@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Mi Página</title>
+    <title>Barriles</title>
 </head>
 <body>
     <head>
@@ -65,10 +65,10 @@
                         </thead>
                         <tbody>
                             <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
-                                <td th:text="${barril.id}" class="p-4">1</td>
-                                <td th:text="${barril.litros}" class="p-4">123</td>
-                                <td th:text="${barril.estado}" class="p-4">456456</td>
-                                <td th:text="${barril.notas}" class="p-4">Cerveza</td>
+                                <td th:text="${barril.id}" class="p-4"></td>
+                                <td th:text="${barril.litros}" class="p-4"></td>
+                                <td th:text="${barril.estado}" class="p-4"></td>
+                                <td th:text="${barril.notas}" class="p-4"></td>
                                 <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2">
                                     <a th:href="@{/barril/showBarril/{id}(id=${barril.id})}"><button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button></a>
                                     <a th:href="@{/barril/editarBarril/{id}(id=${barril.id})}"><button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button></a>
