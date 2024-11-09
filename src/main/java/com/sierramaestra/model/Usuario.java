@@ -15,15 +15,18 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "legajo", nullable = false, length = 50)
+    private String legajo;
+
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
-    
+
     @Column(name = "apellido", nullable = false, length = 50)
     private String apellido;
 
     @Column(name = "dni", nullable = false, length = 50)
     private String dni;
-    
+
     @Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
@@ -33,17 +36,18 @@ public class Usuario {
     @Column(name = "contrasena", nullable = false, length = 50)
     private String contrasena;
 
-    @Column(name = "activo", nullable = false, length = 50)
+    @Column(name = "activo", nullable = false)
     private boolean activo;
-    
+
     // Constructor vacío
     public Usuario() {
+
     }
 
-    // Constuctor completo
-    public Usuario(Long id, String nombre, String apellido, String dni, String email, String rol, String contrasena,
-            boolean activo) {
+    // Constructor completo
+    public Usuario(Long id, String legajo, String nombre, String apellido, String dni, String email, String rol, String contrasena, boolean activo) {
         this.id = id;
+        this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -53,12 +57,21 @@ public class Usuario {
         this.activo = activo;
     }
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLegajo() {
+        return legajo;
+    }
+
+    public void setLegajo(String legajo) {
+        this.legajo = legajo;
     }
 
     public String getNombre() {
@@ -112,7 +125,7 @@ public class Usuario {
     public String getEstadoActivo() {
         return this.activo ? "Activo" : "Inactivo";
     }
-    
+
     public boolean isActivo() {
         return activo;
     }
@@ -123,10 +136,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email="
-                + email + ", rol=" + rol + ", contrasena=" + contrasena + ", activo=" + activo + "]";
+        return "Usuario [id=" + id + ", legajo=" + legajo + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email=" + email + ", rol=" + rol + ", activo=" + activo + "]";
     }
-
+    
 }
-
- 

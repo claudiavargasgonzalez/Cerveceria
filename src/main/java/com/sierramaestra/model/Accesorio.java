@@ -9,17 +9,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
-
 @Entity
-@Table(name = "barril")
-public class Barril {
+@Table(name = "accesorio")
+public class Accesorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "litros", nullable = false)
-    private Integer litros;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
     
     @Column(name = "estado")
     private String estado;
@@ -29,23 +28,23 @@ public class Barril {
 
     // Relación ManyToOne con Lote
     @ManyToOne
-    @JoinColumn(name = "lote_id")  // Crea la columna lote_id en la tabla barril para asociar barriles con un lote
-    private Lote lote;
+    @JoinColumn(name = "barril_id")  // Crea la columna lote_id en la tabla barril para asociar barriles con un lote
+    private Barril barril;
 
     // Constructores
-    public Barril(Long id, Integer litros, String estado, String notas, Lote lote) {
+    public Accesorio(Long id, String nombre, String estado, String notas, Barril barril) {
         this.id = id;
-        this.litros = litros;
+        this.nombre = nombre;
         this.estado = estado;
         this.notas = notas;
-        this.lote = lote;
+        this.barril = barril;
     }
 
-    public Barril() {
+    public Accesorio() {
     }
 
-    public Barril(Integer litros, String estado, String notas) {
-        this.litros = litros;
+    public Accesorio(String nombre, String estado, String notas) {
+        this.nombre = nombre;
         this.estado = estado;
         this.notas = notas;
     }
@@ -59,12 +58,12 @@ public class Barril {
         this.id = id;
     }
 
-    public Integer getLitros() {
-        return litros;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setLitros(Integer litros) {
-        this.litros = litros;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEstado() {
@@ -83,11 +82,11 @@ public class Barril {
         this.notas = notas;
     }
 
-    public Lote getLote() {
-        return lote;
+    public Barril getBarril() {
+        return barril;
     }
 
-    public void setLote(Lote lote) {
-        this.lote = lote;
+    public void setBarril(Barril barril) {
+        this.barril = barril;
     }
 }

@@ -1,4 +1,8 @@
 package com.sierramaestra.model;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,12 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "barril")
-public class Barril {
+@Table(name = "madurador")
+public class Madurador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +31,27 @@ public class Barril {
     
     @Column(name = "notas")
     private String notas;
+    
+    //@Column(name = "fecha_carga", nullable = false)
+    //@Temporal(TemporalType.DATE)
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //private Date fechaCarga;
+
+    //@Column(name = "fecha_fin", nullable = false)
+    //@Temporal(TemporalType.DATE)
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //private Date fechaFin;
 
     // Relación ManyToOne con Lote
     @ManyToOne
     @JoinColumn(name = "lote_id")  // Crea la columna lote_id en la tabla barril para asociar barriles con un lote
     private Lote lote;
+    
+    
+    
 
     // Constructores
-    public Barril(Long id, Integer litros, String estado, String notas, Lote lote) {
+    public Madurador(Long id, Integer litros, String estado, String notas, Lote lote) {
         this.id = id;
         this.litros = litros;
         this.estado = estado;
@@ -41,10 +59,10 @@ public class Barril {
         this.lote = lote;
     }
 
-    public Barril() {
+    public Madurador() {
     }
 
-    public Barril(Integer litros, String estado, String notas) {
+    public Madurador(Integer litros, String estado, String notas) {
         this.litros = litros;
         this.estado = estado;
         this.notas = notas;
@@ -90,4 +108,19 @@ public class Barril {
     public void setLote(Lote lote) {
         this.lote = lote;
     }
+    //public Date getFechaCarga() {
+    //    return fechaCarga;
+    //}
+
+    //public void setFechaCarga(Date fechaCarga) {
+    //    this.fechaCarga = fechaCarga;
+    //}
+
+    //public Date getFechaFin() {
+    //    return fechaFin;
+    //}
+
+    //public void setFechaFin(Date fechaFin) {
+    //    this.fechaFin = fechaFin;
+    //}
 }

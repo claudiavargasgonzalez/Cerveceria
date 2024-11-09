@@ -20,9 +20,9 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestParam String email,@RequestParam String contrasena, Model model) {
-		if(authService.authenticate(email, contrasena)) {
-			model.addAttribute("email", email);
+	public String login(@RequestParam String legajo,@RequestParam String contrasena, Model model) {
+		if(authService.authenticate(legajo, contrasena)) {
+			model.addAttribute("legajo", legajo);
 			return "menu-principal";
 		}else {
 			model.addAttribute("error", "Credenciales invalidas");

@@ -13,8 +13,8 @@ public class AuthServiceImpl implements AuthService {
 	private UsuarioRepositorio usuarioRepository;
 
 	@Override
-	public boolean authenticate(String email, String contrasena) {
-		Usuario usuario = usuarioRepository.findByEmail(email);
+	public boolean authenticate(String legajo, String contrasena) {
+		Usuario usuario = usuarioRepository.findByLegajo(legajo);
 		if(usuario != null) {
 			return usuario.getContrasena().equals(contrasena);
 		}
