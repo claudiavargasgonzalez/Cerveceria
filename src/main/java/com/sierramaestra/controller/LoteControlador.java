@@ -1,6 +1,8 @@
 package com.sierramaestra.controller;
 
+import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
+import com.sierramaestra.service.CervezaService;
 import com.sierramaestra.service.LoteServicio;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class LoteControlador {
 
     @Autowired
     private LoteServicio servicio;
+    
+    @Autowired
+    private CervezaService cervezaService;
     
     
     @GetMapping("/lote")
@@ -47,6 +52,10 @@ public class LoteControlador {
 
     @PostMapping("/lote")
     public String guardarLote(@ModelAttribute("lote") Lote lote) {
+    	 if (lote.getCervezaO() != null && lote.getCervezaO().getId() != null) {
+             Cerveza cerveza = cervezaService.obtenerCervezaPorId(lote.getCervezaO().getId());
+             lote.setCervezaO(cerveza);  // Asocia la cerveza encontrada al lote
+         }
         servicio.guardarLote(lote);
         return "redirect:/lote";
     }

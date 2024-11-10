@@ -1,6 +1,8 @@
 package com.sierramaestra.service;
 
 import java.util.List;
+
+import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,13 @@ public interface LoteServicio {
 	    void eliminarLote(Long id);
 	    
 	    Page<Lote> listarTodosLosLotes(Pageable pageable);
+	    
+	    List<Lote> obtenerLotesActivosPorCerveza(Cerveza cerveza);
+	    
+	    double obtenerStockDisponible(Lote lote);
+	    
+	    
+	    
 	    
 
 }

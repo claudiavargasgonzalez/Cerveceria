@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Lotes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold mb-6">Resultados de Lotes</h2>
+    
+    <table class="min-w-full table-auto">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Cerveza</th>
+                <th class="px-4 py-2">Cantidad</th>
+                <th class="px-4 py-2">Fecha Vencimiento</th>
+                <th class="px-4 py-2">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="lote : ${lotes}">
+                <tr>
+                    <td class="px-4 py-2" th:text="${lote.cerveza.nombreCerveza}"></td>
+                    <td class="px-4 py-2" th:text="${lote.cantidadLitros}"></td>
+                    <td class="px-4 py-2" th:text="${#dates.format(lote.fechaVencimiento, 'dd/MM/yyyy')}"></td>
+                    <td class="px-4 py-2" th:text="${lote.estado}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

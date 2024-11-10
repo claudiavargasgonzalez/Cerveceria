@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -19,6 +21,10 @@ public class Lote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "cerveza_id")
+    private Cerveza cervezaO;
 
     @Column(name = "cerveza", nullable = false)
     private String cerveza;
@@ -49,79 +55,155 @@ public class Lote {
 
     // Constructores
     public Lote() {}
+    
+    public Lote(Long id, String cerveza, Integer cantidadLitros, String estado, String notas, Date fechaCarga,
+			Date fechaVencimiento, Date fechaCargaMadurador) {
+		super();
+		this.id = id;
+		this.cerveza = cerveza;
+		this.cantidadLitros = cantidadLitros;
+		this.estado = estado;
+		this.notas = notas;
+		this.fechaCarga = fechaCarga;
+		this.fechaVencimiento = fechaVencimiento;
+		this.fechaCargaMadurador = fechaCargaMadurador;
+	}
 
-    public Lote(String cerveza, Integer cantidadLitros, String estado, String notas, Date fechaCarga, Date fechaVencimiento, Date fechaCargaMadurador) {
-        this.cerveza = cerveza;
-        this.cantidadLitros = cantidadLitros;
-        this.estado = estado;
-        this.notas = notas;
-        this.fechaCarga = fechaCarga;
-        this.fechaVencimiento = fechaVencimiento;
-        this.fechaCargaMadurador = fechaCargaMadurador;
-    }
 
-    // Getters y Setters correctos
-    public Long getId() {
-        return id;
-    }
+    public Lote(Long id, Cerveza cervezaO, String cerveza, Integer cantidadLitros, String estado, String notas,
+			Date fechaCarga, Date fechaVencimiento, Date fechaCargaMadurador) {
+		super();
+		this.id = id;
+		this.cervezaO = cervezaO;
+		this.cerveza = cerveza;
+		this.cantidadLitros = cantidadLitros;
+		this.estado = estado;
+		this.notas = notas;
+		this.fechaCarga = fechaCarga;
+		this.fechaVencimiento = fechaVencimiento;
+		this.fechaCargaMadurador = fechaCargaMadurador;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCerveza() {
-        return cerveza;
-    }
 
-    public void setCerveza(String cerveza) {
-        this.cerveza = cerveza;
-    }
+	// Getters y Setters correctos
+    
+    
+    
 
-    public Integer getCantidadLitros() {
-        return cantidadLitros;
-    }
 
-    public void setCantidadLitros(Integer cantidadLitros) {
-        this.cantidadLitros = cantidadLitros;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getEstado() {
-        return estado;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setCervezaO(Cerveza cervezaO) {
+		this.cervezaO = cervezaO;
+	}
+	
+	/*public Long getCervezaId() {
+        return cervezaO != null ? cervezaO.getId() : null;
+    } */
+	
+	
+	public Cerveza getCervezaO() {
+		return cervezaO;
+	}
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	public String getCerveza() {
+		return cerveza;
+	}
 
-    public String getNotas() {
-        return notas;
-    }
+	public void setCerveza(String cerveza) {
+		this.cerveza = cerveza;
+	}
 
-    public void setNotas(String notas) {
-        this.notas = notas;
-    }
+	public String getTipocerveza() {
+		return cerveza;
+	}
 
-    public Date getFechaCarga() {
-        return fechaCarga;
-    }
 
-    public void setFechaCarga(Date fechaCarga) {
-        this.fechaCarga = fechaCarga;
-    }
 
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
+	public void setTipocerveza(String cerveza) {
+		this.cerveza = cerveza;
+	}
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
 
-    public Date getFechaCargaMadurador() {
-        return fechaCargaMadurador;
-    }
 
-    public void setFechaCargaMadurador(Date fechaCargaMadurador) {
-        this.fechaCargaMadurador = fechaCargaMadurador;
-    }
-}
+	public Integer getCantidadLitros() {
+		return cantidadLitros;
+	}
+
+
+
+	public void setCantidadLitros(Integer cantidadLitros) {
+		this.cantidadLitros = cantidadLitros;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+
+	public String getNotas() {
+		return notas;
+	}
+
+
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+
+
+
+	public Date getFechaCarga() {
+		return fechaCarga;
+	}
+
+
+
+	public void setFechaCarga(Date fechaCarga) {
+		this.fechaCarga = fechaCarga;
+	}
+
+
+
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+
+
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+
+
+	public Date getFechaCargaMadurador() {
+		return fechaCargaMadurador;
+	}
+
+
+
+	public void setFechaCargaMadurador(Date fechaCargaMadurador) {
+		this.fechaCargaMadurador = fechaCargaMadurador;
+	}
+
+
+
+	
+   }
