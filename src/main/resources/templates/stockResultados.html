@@ -3,35 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de Lotes</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Lotes de Cerveza</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body>
 
-<div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold mb-6">Resultados de Lotes</h2>
-    
-    <table class="min-w-full table-auto">
-        <thead>
-            <tr>
-                <th class="px-4 py-2">Cerveza</th>
-                <th class="px-4 py-2">Cantidad</th>
-                <th class="px-4 py-2">Fecha Vencimiento</th>
-                <th class="px-4 py-2">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="lote : ${lotes}">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Lotes de Cerveza</h1>
+
+        <!-- Formulario para buscar lotes -->
+        <form action="/buscarLotes" method="get" class="mb-4">
+            <label for="cervezaId" class="block text-sm font-medium text-gray-700">Seleccionar Cerveza</label>
+            <select id="cervezaId" name="cervezaId" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <!-- Este campo debería llenarse con las cervezas disponibles (puedes usar un "th:each" para iterar las cervezas) -->
+                <option value="1">Sierra Leon IPA</option>
+                <option value="2">Pilsner</option>
+            </select>
+            <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>
+        </form>
+
+        <!-- Tabla para mostrar los lotes -->
+        <table class="min-w-full bg-white border border-gray-200 rounded">
+            <thead>
                 <tr>
-                    <td class="px-4 py-2" th:text="${lote.cerveza.nombreCerveza}"></td>
-                    <td class="px-4 py-2" th:text="${lote.cantidadLitros}"></td>
-                    <td class="px-4 py-2" th:text="${#dates.format(lote.fechaVencimiento, 'dd/MM/yyyy')}"></td>
-                    <td class="px-4 py-2" th:text="${lote.estado}"></td>
+                    <th class="py-2 px-4 text-left border-b">Cerveza</th>
+                    <th class="py-2 px-4 text-left border-b">Cantidad de Litros</th>
+                    <th class="py-2 px-4 text-left border-b">Estado</th>
+                    <th class="py-2 px-4 text-left border-b">Fecha de Vencimiento</th>
                 </tr>
-            </th:block>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <tr th:each="lote : ${lotes}">
+                    <td class="py-2 px-4 border-b" th:text="${lote.nombreCerveza}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${lote.cantidadLitros}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${lote.estado}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${#dates.format(lote.fechaVencimiento, 'dd/MM/yyyy')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

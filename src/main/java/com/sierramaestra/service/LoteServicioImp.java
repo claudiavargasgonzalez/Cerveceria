@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sierramaestra.model.Barril;
 import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
@@ -68,7 +67,7 @@ public class LoteServicioImp implements LoteServicio {
 	public List<Lote> obtenerLotesActivosPorCerveza(Cerveza cerveza) {
 		 // Obtener los lotes para una cerveza
         List<Lote> lotes = loteRepositorio.findByCerveza(cerveza);
-
+        
         // Calcular los lotes activos
         List<Lote> lotesActivos = new ArrayList<>();
         
@@ -91,6 +90,7 @@ public class LoteServicioImp implements LoteServicio {
 
         return lotesActivos;
     }
+    
 
 	@Override
 	public double obtenerStockDisponible(Lote lote) {

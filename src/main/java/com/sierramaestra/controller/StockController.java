@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
 import com.sierramaestra.repository.CervezaRepository;
@@ -40,5 +39,12 @@ public class StockController {
         }
         return "stockResultados";
     }
+    
+    /*@GetMapping("/buscarLotes")
+    public String buscarLotes(@RequestParam("cervezaId") Long cervezaId, Model model) {
+        List<LoteCervezaDTO> lotes = loteServicio.obtenerLotesActivosPorCerveza(cervezaId);
+        model.addAttribute("lotes", lotes);
+        return "stockResultados";
+    }*/
 }
 

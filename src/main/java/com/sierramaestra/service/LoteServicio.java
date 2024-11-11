@@ -1,7 +1,6 @@
 package com.sierramaestra.service;
 
 import java.util.List;
-
 import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
 import org.springframework.data.domain.Page;
