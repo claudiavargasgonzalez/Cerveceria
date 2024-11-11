@@ -13,7 +13,7 @@ public interface ClienteServicio {
     public Cliente obtenerClientePorId(Long id);
     
     public Cliente actualizarCliente(Cliente cliente);
-    
+    	
     public void eliminarCliente(Long id);
 
     // Métodos del servicio, como contarUsuarios y listarUsuarios
