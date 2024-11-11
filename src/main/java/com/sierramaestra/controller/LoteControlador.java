@@ -1,6 +1,8 @@
 package com.sierramaestra.controller;
 
+import com.sierramaestra.model.Barril;
 import com.sierramaestra.model.Lote;
+import com.sierramaestra.service.BarrileServicio;
 import com.sierramaestra.service.LoteServicio;
 
 import java.util.List;
@@ -22,7 +24,9 @@ public class LoteControlador {
     @Autowired
     private LoteServicio servicio;
     
-    
+    @Autowired
+    private BarrileServicio barrileServicio;
+
     @GetMapping("/lote")
     public String listarTodosLosLotes(@RequestParam(defaultValue = "0") int page, Model modelo) {
         Pageable pageable = PageRequest.of(page, 10); // 10 elementos por página
@@ -34,16 +38,66 @@ public class LoteControlador {
         return "tabla_lote";
     }
 
-    @GetMapping("/lote/{id}")
-    public String obtenerLotePorId(@PathVariable("id") Long id, Model modelo) {
+    @PostMapping("/lote/{id}/cargarBarriles")
+    public String cargarBarrilesEnLote(
+        @PathVariable("id") Long id,
+        @RequestParam("barrilesSeleccionados") List<Long> barrilesIds,
+        Model modelo
+    ) {
+        // Obtener el lote
         Lote lote = servicio.obtenerLotePorId(id);
-        if (lote != null) {
-            modelo.addAttribute("lote", lote);
-            return "show_lote"; // Asegúrate de que este sea el nombre correcto de tu plantilla
-        } else {
+        if (lote == null) {
+            modelo.addAttribute("error", "Lote no encontrado.");
             return "404";
         }
+
+        // Obtener los barriles seleccionados
+        List<Barril> barriles = barrileServicio.listarTodosLosBarriles()
+            .stream()
+            .filter(b -> barrilesIds.contains(b.getId()) && "Limpio".equalsIgnoreCase(b.getEstado()))
+            .toList();
+
+        if (barriles.isEmpty()) {
+            modelo.addAttribute("error", "No se encontraron barriles válidos para asignar.");
+            return "show_lote";
+        }
+
+        // Asignar los barriles al lote
+        for (Barril barril : barriles) {
+            barril.setEstado("Cargado"); // Cambiar estado a "Cargado"
+            barril.setLote(lote);        // Asociar al lote
+            barrileServicio.actualizarBarril(barril);
+        }
+
+        // Cambiar el estado del lote a "CARGADO"
+        lote.setEstado("Cargado");
+        servicio.actualizarLote(lote);
+
+        modelo.addAttribute("lote", lote);
+        modelo.addAttribute("mensaje", "Barriles cargados exitosamente.");
+        return "redirect:/lote/" + id;
     }
+
+    @GetMapping("/lote/{id}")
+    public String obtenerLotePorId(@PathVariable Long id, Model model) {
+        Lote lote = servicio.obtenerLotePorId(id);
+        if (lote == null) {
+            model.addAttribute("error", "No se encontró un lote con el ID especificado.");
+            return "error";
+        }
+
+        // Obtener barriles asociados al lote
+        List<Barril> barrilesCargados = barrileServicio.listarBarrilesPorLote(lote.getId());
+
+        // Obtener barriles disponibles para asignar
+        List<Barril> barrilesLimpios = barrileServicio.listarBarrilesPorEstado("Limpio");
+
+        model.addAttribute("lote", lote);
+        model.addAttribute("barrilesCargados", barrilesCargados);
+        model.addAttribute("barrilesLimpios", barrilesLimpios);
+        return "show_lote";
+    }
+
 
     @PostMapping("/lote")
     public String guardarLote(@ModelAttribute("lote") Lote lote) {
@@ -55,7 +109,7 @@ public class LoteControlador {
     public String crearLoteFormulario(Model modelo) {
         Lote lote = new Lote();
         modelo.addAttribute("lote", lote);
-        modelo.addAttribute("estados", new String[]{"Activo", "Inactivo"});
+        modelo.addAttribute("estados", new String[]{"Activo"});
         return "crear_lote";
     }
 
