@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Editar CLiente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/editar_usuario.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand">Gestión de CLiente</a>
+        <!-- NavBar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <br>
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Edición de CLiente</h1>
+            <div class="card-body">
+                <form th:action="@{/clientes/{id}(id=${cliente.id})}" th:object="${cliente}" method="POST">
+                  
+                <!-- Campo Legajo con validaciones -->
+                <div class="form-group">
+                        <label for="legajo">Legajo:</label>
+                        <input type="text" name="legajo" th:field="*{legajo}" class="form-control"
+                        placeholder="Digite su legajo" pattern="^\d{1,3}$" required>
+                        <small class="form-text text-muted">Ingrese su legajo, máximo hasta 3 dígitos</small>
+                    </div>
+                  
+                    <!-- Campo Nombre con validaciones -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" th:field="*{nombre}" class="form-control"
+                        placeholder="Digite su nombre" pattern="[A-Za-z]+" maxlength="20" required>
+                        <small class="form-text text-muted">Solo letras permitidas (máximo 20 caracteres)</small>
+                    </div>
+
+                    <!-- Campo Apellido con validaciones -->
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" th:field="*{apellido}" class="form-control" 
+                        placeholder="Digite su apellido" pattern="[A-Za-z\s]+" maxlength="20" required>
+                        <small class="form-text text-muted">Solo letras permitidas (máximo 20 caracteres)</small>
+                    </div>
+
+                    <!-- Campo DNI -->
+                    <div class="form-group">
+                        <label for="dni">DNI:</label>
+                        <input type="text" name="dni" th:field="*{dni}" class="form-control" 
+                        placeholder="Digite su DNI" pattern="^\d{8}$" maxlength="8" required>
+                        <small class="form-text text-muted">Debe tener exactamente 8 dígitos numéricos</small>
+                    </div>
+ 
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" th:field="*{email}" class="form-control" 
+                        placeholder="Digite su email" maxlength="50" required>
+                        <small class="form-text text-muted">Debe ser una dirección de email válida (máximo 50 caracteres)</small>
+                    </div>
+
+
+                    <<!-- Campo Rol -->
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <select name="tipo" th:field="*{tipo}" class="form-control" required>
+                            <option value="Consumidor Final">Consumidor Final</option>
+                            <option value="Empresa">Empresa</option>
+                            
+                        </select>
+                    </div>
+
+                  <!-- Checkbox Activo por defecto marcado -->
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="activo" th:field="*{activo}" checked>
+                        <label for="activo" class="form-check-label">Activo</label>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <a th:href="@{/clientes}" class="btn btn-secondary">Volver</a>
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    </div>
+                                  
+                </form>
+            </div>
+       
+        </div>
+       
+    </div>
+    </div>
+
+
+</body>
+</html>
