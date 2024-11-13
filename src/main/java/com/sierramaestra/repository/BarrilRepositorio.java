@@ -9,4 +9,5 @@ import org.springframework.data.domain.Pageable;
 public interface BarrilRepositorio extends JpaRepository<Barril, Long> {
     List<Barril> findByEstado(String estado);
     Page<Barril> findByEstado(String estado, Pageable pageable);
+    List<Barril> findByLoteId(Long loteId);
 }

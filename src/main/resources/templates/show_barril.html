@@ -17,25 +17,117 @@
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-2xl font-bold text-center mb-6">Detalles del Barril</h1>
+
+            <!-- Número de Barril -->
             <div class="mb-4">
-				<h3>Litros cargados</h3>
-                <label th:text="${barril.litros}" for="litros" class="block text-sm font-medium text-gray-700 "></label>
+                <h3 class="font-semibold">Número de Barril</h3>
+                <label th:text="${barril.id}" class="block text-sm font-medium text-gray-700"></label>
             </div>
-			<br>
+            <br>
+
+            <!-- Número de Lote -->
             <div class="mb-4">
-				<h3>Estado del barril</h3>
-                <label th:text="${barril.estado}" for="estado" class="block text-sm font-medium text-gray-700">:</label>
+                <h3 class="font-semibold">Número de Lote</h3>
+                <label th:if="${barril.lote != null}" th:text="${barril.lote.id}" class="block text-sm font-medium text-gray-700"></label>
             </div>
-			<br>
+            <br>
+
+            <!-- Cerveza -->
             <div class="mb-4">
-				<h3>Nota</h3>
-                <label th:text="${barril.notas}" for="notas" class="block text-sm font-medium text-gray-700"></label>
+                <h3 class="font-semibold">Cerveza</h3>
+                <label th:text="${barril.cerveza != null ? barril.cerveza.nombreCerveza : 'Sin cerveza asignada'}" class="block text-sm font-medium text-gray-700"></label>
             </div>
-			<br>
+            <br>
+
+            <!-- Litros Cargados -->
+            <div class="mb-4">
+                <h3 class="font-semibold">Litros Cargados</h3>
+                <label th:text="${barril.litros}" class="block text-sm font-medium text-gray-700"></label>
+            </div>
+            <br>
+
+            <!-- Estado del Barril -->
+            <div class="mb-4">
+                <h3 class="font-semibold">Estado del Barril</h3>
+                <label th:text="${barril.estado}" class="block text-sm font-medium text-gray-700"></label>
+            </div>
+            <br>
+
+            <!-- Nota -->
+            <div class="mb-4">
+                <h3 class="font-semibold">Nota</h3>
+                <label th:text="${barril.notas}" class="block text-sm font-medium text-gray-700"></label>
+            </div>
+            <br>
+
+            <!-- Botón de Volver -->
             <div class="flex justify-end mt-6">
                 <a href="/barril" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-600">Volver</a>
+            </div>
+
+            <!-- Lotes asociados al barril -->
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold mb-4">Lote Asociado al Barril</h2>
+                <table class="table-auto w-full border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 px-4 py-2">N° Lote</th>
+                            <th class="border border-gray-300 px-4 py-2">Litros</th>
+                            <th class="border border-gray-300 px-4 py-2">Cerveza</th>
+                            <th class="border border-gray-300 px-4 py-2">Fecha de Carga</th>
+                            <th class="border border-gray-300 px-4 py-2">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="lote : ${lotesCargados}">
+                            <td th:text="${lote.id}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                            <td th:text="${lote.litros}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                            <td th:text="${lote.cerveza != null ? lote.cerveza.nombreCerveza : 'Sin cerveza'}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                            <td th:text="${#temporals.format(lote.fechaCarga, 'yyyy-MM-dd')}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                            <td th:text="${lote.estado}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex justify-end mt-4">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                        Cargar Lote
+                    </button>
+                </div>
+            </div>
+
+            <!-- Asignar Cerveza al barril -->
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold mb-4">Asignar Cerveza</h2>
+                <form th:action="@{/barril/{id}/asignarCerveza(id=${barril.id})}" method="post">
+                    <table class="table-auto w-full border-collapse border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-4 py-2">Seleccionar</th>
+                                <th class="border border-gray-300 px-4 py-2">ID Cerveza</th>
+                                <th class="border border-gray-300 px-4 py-2">Nombre Cerveza</th>
+                                <th class="border border-gray-300 px-4 py-2">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cerveza : ${cervezasDisponibles}">
+                                <td class="border border-gray-300 px-4 py-2 text-center">
+                                    <input type="radio" name="cervezaSeleccionada" th:value="${cerveza.id}">
+                                </td>
+                                <td th:text="${cerveza.id}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                                <td th:text="${cerveza.nombre}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                                <td th:text="${cerveza.tipo}" class="border border-gray-300 px-4 py-2 text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="flex justify-end mt-4">
+                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                            Asignar Cerveza
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </body>
 </html>
+

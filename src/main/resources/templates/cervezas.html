@@ -11,33 +11,53 @@
 </head>
 <body >
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/menu-principal">
-                    <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra" style="max-width: 50px; border-radius: 50%;">
-                </a>
-                <h2 class="navbar-text"><a href="/menu-principal" class="text-decoration-none">Menú Principal</a></h2>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="/cervezas">Cerveza</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Cliente</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/barril">Equipamiento</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/lote">Lote</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Pedidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Stock</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+        <div class="logo">
+            <a href="/menu-principal">
+                <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra">
+            </a>
+        </div>
+        <h2></h2>
+		<nav>
+			<ul class="menu">
+				<li><a href="/cervezas">Cerveza</a></li>
+				<li><a href="/clientes">Cliente</a></li>
+				<!-- Dropdown Equipamiento -->
+				<li class="relative group"><a href="#" class="items-center">Equipamiento</a>
+					<!-- Submenú desplegable -->
+					<ul
+						class="absolute hidden group-hover:block bg-black shadow-lg rounded-md mt-1 w-32 py-2">
+						<li><a href="/barril"
+							class="block px-4 py-2 hover:bg-gray-200">Barril</a></li>
+						<li><a href="/madurador"
+							class="block px-4 py-2 hover:bg-gray-200">Madurador</a></li>
+						<li><a href="/accesorio"
+							class="block px-4 py-2 hover:bg-gray-200">Accesorios</a></li>
+					</ul></li>
+				<li><a href="#">Pedidos</a></li>
+				<li><a href="/lote">Lote</a></li>
+				<!-- Dropdown Stock -->
+				<li class="relative group"><a href="#" class="items-center">Stock</a>
+					<!-- Submenú desplegable -->
+					<ul
+						class="absolute hidden group-hover:block bg-black shadow-lg rounded-md mt-1 w-32 py-2">
+						<li><a href="/barril"
+							class="block px-4 py-2 hover:bg-gray-200">Stock por cerveza</a></li>
+					</ul></li>
+
+				<li><a href="/usuarios">Usuarios</a></li>
+				<li><a href="/login">Cerrar Sesión</a></li>
+			</ul>
+		</nav>
+		<!--  <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>-->
+	</header>
+	<br>
 
     <div class="container">
-        <h1>Tipos de cervezas</h1>
+        <h1>Listado de cervezas</h1>
         <div class="row">
             <div class="col-lg-3">
                 <a th:href="@{/cervezas/nuevaCerveza}" class="btn btn-primary btn-sm mb-3">Agregar cerveza</a>

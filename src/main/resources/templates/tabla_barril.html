@@ -9,10 +9,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        body {
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        /* Ajuste del header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* El logo a la izquierda y el menú centrado */
+            padding: 15px 40px;
+            background-color: #333;
+            color: white;
+        }
+
+        /* Logo a la izquierda */
+        .logo img {
+            max-width: 150px; /* Ajusta el tamaño del logo */
+        }
+
+        /* Estilos del contenedor para centrar los items del menú */
+        nav {
+            flex-grow: 1; /* Permite que el nav ocupe el espacio restante */
+            display: flex;
+            justify-content: center; /* Centra los items horizontalmente */
+        }
+
+        /* Centrado y espaciado de los items del menú */
+        nav ul.menu {
+            display: flex;
+            list-style: none;
+            gap: 30px; /* Aumenta el espacio entre los items */
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Estilos para los enlaces del menú */
+        ul.menu li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -30,9 +63,16 @@
         <nav>
             <ul class="menu">
                 <li><a href="/cervezas">Cerveza</a></li>
-                <li><a href="#">Cliente</a></li>
-                <li><a href="/lote">Lote</a></li>
+                <li><a href="/clientes">Cliente</a></li>
+                <li class="relative group"><a href="#" class="items-center">Equipamiento</a>
+                    <ul class="absolute hidden group-hover:block bg-black shadow-lg rounded-md mt-1 w-32 py-2">
+                        <li><a href="/barril" class="block px-4 py-2 hover:bg-gray-200">Barril</a></li>
+                        <li><a href="/madurador" class="block px-4 py-2 hover:bg-gray-200">Madurador</a></li>
+                        <li><a href="/accesorio" class="block px-4 py-2 hover:bg-gray-200">Accesorios</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">Pedidos</a></li>
+                <li><a href="/lote">Lote</a></li>
                 <li><a href="#">Stock</a></li>
                 <li><a href="/usuarios">Usuarios</a></li>
                 <li><a href="/login">Cerrar Sesión</a></li>
@@ -49,11 +89,26 @@
     <div class="container mx-auto p-6 max-w-full mt-12">
         <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
             <h1 class="text-2xl font-bold mb-4">Listado de Barriles</h1>
-            <div class="flex flex-col sm:flex-row justify-between mb-4">
+
+            <!-- Mensaje de error si el barril no se encuentra -->
+            <div th:if="${mensajeError}" class="text-red-500 mb-4" th:text="${mensajeError}"></div>
+
+            <!-- Filtro por estado -->
+            <form method="get" th:action="@{/barril}" class="mb-4 flex flex-col sm:flex-row items-center">
+                <select name="estado" class="p-2 border border-gray-300 rounded-lg mr-2">
+                    <option value="">Todos</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Filtrar</button>
+            </form>
+
+            <div class="flex justify-between mb-4">
                 <a th:href="@{/barril/nuevo}">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Barril</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Añadir Barril</button>
                 </a>
             </div>
+
             <table class="w-full bg-white rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-200 text-left text-xs sm:text-base">
@@ -65,19 +120,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
+                    <!-- Lista de barriles -->
+                    <tr th:each="barril : ${barriles != null ? barriles : barrilesPage.content}" class="border-b text-sm sm:text-base">
                         <td th:text="${barril.id}" class="p-4">1</td>
                         <td th:text="${barril.litros}" class="p-4">123</td>
-                        <td th:text="${barril.estado}" class="p-4">456456</td>
-                        <td th:text="${barril.notas}" class="p-4">Cerveza</td>
+                        <td th:text="${barril.estado}" class="p-4">Activo</td>
+                        <td th:text="${barril.notas}" class="p-4">Notas sobre el barril</td>
                         <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
+                            <!-- Botón "Show" -->
                             <a th:href="@{/barril/showBarril/{id}(id=${barril.id})}">
-                                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button>
+                                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Ver</button>
                             </a>
+                            <!-- Botón "Editar" -->
                             <a th:href="@{/barril/editarBarril/{id}(id=${barril.id})}">
                                 <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
                             </a>
-                            <a th:href="@{/barril/{id}(id=${barril.id})}">
+                            <!-- Botón "Eliminar" -->
+                            <a th:href="@{/barril/{id}(id=${barril.id})}" th:onclick="return confirm('¿Estás seguro de que deseas eliminar este barril?');">
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
                             </a>
                         </td>
@@ -85,19 +144,20 @@
                 </tbody>
             </table>
 
-            <div class="mt-4 flex justify-between">
-                <div th:if="${barrilesPage.hasPrevious()}">
-                    <a th:href="@{/barril(page=${barrilesPage.number - 1}, estado=${param.estado})}">
+            <!-- Paginación, visible solo si hay más de una página -->
+            <div th:if="${totalPages > 1}" class="mt-4 flex justify-between items-center">
+                <div th:if="${currentPage > 0}">
+                    <a th:href="@{/barril(page=${currentPage - 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
                     </a>
                 </div>
-                <div th:if="${barrilesPage.hasNext()}">
-                    <a th:href="@{/barril(page=${barrilesPage.number + 1}, estado=${param.estado})}">
+                <div class="text-center">
+                    Página <span th:text="${currentPage + 1}">1</span> de <span th:text="${totalPages}">1</span>
+                </div>
+                <div th:if="${currentPage + 1 < totalPages}">
+                    <a th:href="@{/barril(page=${currentPage + 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
                     </a>
-                </div>
-                <div class="mt-2">
-                    Página <span th:text="${barrilesPage.number + 1}">1</span> de <span th:text="${barrilesPage.totalPages}">1</span>
                 </div>
             </div>
         </div>

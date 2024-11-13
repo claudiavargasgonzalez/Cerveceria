@@ -1,30 +1,132 @@
-/* Estilo para el título principal */
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Ajuste de la barra de navegación */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background-color: #333;
+    color: white;
+    position: fixed; /* Fija el nav en la parte superior */
+    width: 100%; /* Abarca todo el ancho de la página */
+    z-index: 1000; /* Se asegura de estar por encima de otros elementos */
+}
+
+/* Ajuste del logo */
+header .logo img {
+    max-height: 60px; /* Aumenta un poco la altura máxima del logo */
+}
+
+/* Ajuste del menú de navegación */
+nav ul.menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px; /* Espaciado uniforme entre los elementos */
+}
+
+/* Centrado parcial de los elementos */
+nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Centra el menú ligeramente hacia la izquierda */
+}
+
+nav ul.menu > li {
+    padding: 0 10px; /* Espaciado horizontal entre los elementos del menú */
+}
+
+nav ul.menu > li > a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px; /* Tamaño del padding para agrandar los enlaces */
+    font-size: 1.1rem; /* Aumenta un poco el tamaño del texto */
+}
+
+/* Estilo del submenú desplegable */
+nav ul.menu ul {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    background-color: #444;
+    padding: 0;
+    list-style: none;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+nav ul.menu li:hover ul {
+    display: block; /* Se muestra al pasar el mouse */
+}
+
+nav ul.menu ul li {
+    padding: 8px;
+}
+
+nav ul.menu ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Ajuste para dispositivos móviles */
+.hamburger {
+    display: none; /* Oculto en pantallas grandes */
+}
+
+/* Ajuste del título principal */
+/* Ajuste del título principal */
 h1 {
-    font-size: 2.5rem; /* Tamaño del título principal */
-    margin-top: 2rem; /* Espacio arriba del título */
-    margin-bottom: 1.5rem; /* Espacio debajo del título */
-    text-align: center; /* Centrar el título */
-    margin-top: 9rem;
+    font-size: 1.8rem;
+    margin-left: 2rem; /* Ajusta la posición del título */
+    margin-top: 2rem; /* Espacio entre el nav y el título */
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Contenedor principal */
+.container {
+    padding-top: 8rem; /* Espacio para despegar el contenido del nav */
 }
 
 /* Estilo para el subtítulo */
 h2 {
-    font-size: 24px; /* Tamaño de título más grande */
-    margin: 0 20px; /* Espaciado entre logo y título */
+    font-size: 24px;
+    margin: 0 20px;
 }
 
-/* Estilo para el botón de agregar */
+/* Estilo del botón de agregar */
 .btn-agregar {
     margin-top: 0.5rem;
 }
 
+/* Estilo para centrar y ajustar la tabla */
 .table {
-    width: 100%; /* Cambiar a un valor más grande */
-    margin: auto; /* Centrar la tabla */
+    width: 100%;
+    margin: auto;
 }
 
-/* Estilo para centrar el texto en la tabla */
 .table th, .table td {
-    text-align: center; /* Centrar el texto en la tabla */
+    text-align: center;
+    vertical-align: middle;
 }
+
+/* Ajustes generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 
