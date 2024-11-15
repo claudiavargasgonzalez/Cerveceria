@@ -57,7 +57,11 @@ public class BarrilServicioImlp implements BarrileServicio {
 	    }
 	    
 	    @Autowired
+<<<<<<< HEAD
 	    private BarrilRepositorio barrilRepositorio;
+=======
+	    private BarrilRepositorio barrilRepositorio;	
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
 	    
 	    @Override
 	    public List<Barril> listarBarrilesPorEstadoLimpio() {

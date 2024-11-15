@@ -18,7 +18,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     private ClienteRepositorio repositorio;
 
     @Override
+<<<<<<< HEAD
     public List<Cliente> listarTodosLosClientes() {
+=======
+    public List<Cliente> listarTodosLosCLientes() {
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
         return repositorio.findAll();
     }
 
@@ -43,6 +47,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
+<<<<<<< HEAD
     public List<Cliente> listarClientes(int page, int size, String id) {
         Pageable pageable = PageRequest.of(page, size);
         if (id != null && !id.isEmpty()) {
@@ -63,3 +68,21 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 }
 
+=======
+    public List<Cliente> listarClientes(int page, int size, String legajo) {
+        Pageable pageable = PageRequest.of(page, size);
+        if (legajo != null && !legajo.isEmpty()) {
+            return repositorio.findByLegajoContaining(legajo, pageable).getContent();
+        }
+        return repositorio.findAll(pageable).getContent();
+    }
+
+    @Override
+    public long contarClientes(String legajo) {
+        if (legajo != null && !legajo.isEmpty()) {
+            return repositorio.countByLegajoContaining(legajo); // Corregido el nombre de variable
+        }
+        return repositorio.count();
+    }
+}
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd

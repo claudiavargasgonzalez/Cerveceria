@@ -14,15 +14,22 @@
 
     <header>
         <div class="logo">
+<<<<<<< HEAD
             <a href="/menu-principal">
                 <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra">
             </a>
         </div>
         <h2></h2>
+=======
+            <a><img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra"></a>
+        </div>
+        <h2><a href="/menu-principal">Menú Principal</a></h2>
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
         <nav>
             <ul class="menu">
                 <li><a href="/cervezas">Cerveza</a></li>
                 <li><a href="#">Cliente</a></li>
+<<<<<<< HEAD
                 <!-- Dropdown Equipamiento -->
 				<li class="relative group"><a href="#" class="items-center">Equipamiento</a>
 					<!-- Submenú desplegable -->
@@ -35,6 +42,9 @@
 						<li><a href="/accesorio"
 							class="block px-4 py-2 hover:bg-gray-200">Accesorios</a></li>
 					</ul></li>
+=======
+                <li><a href="/barril">Equipamiento</a></li>
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
                 <li><a href="/lote">Lote</a></li>
                 <li><a href="#">Pedidos</a></li>
                 <li><a href="#">Stock</a></li>
@@ -51,7 +61,11 @@
     
     <div class="container">
         <div class="col text-center">
+<<<<<<< HEAD
             <h1>Listado de clientes</h1>
+=======
+            <h1>Lista de Clientes</h1>
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
         </div>
         <br>
 
@@ -75,16 +89,28 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
+<<<<<<< HEAD
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Telefono</th>
                     <th>Direccion</th>
                     <th>DNI</th>
+=======
+                    <th>Legajo</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="cliente : ${clientes}">
                     <td th:text="${cliente.id}">Id</td>
+<<<<<<< HEAD
                     <td th:text="${cliente.nombre}">Nombre</td>
                     <td th:text="${cliente.apellido}">Apellido</td>
                     <td th:text="${cliente.telefono}">Telefono</td>
@@ -99,6 +125,21 @@
                         <!-- Botón "Eliminar" -->
                         <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}"  th:onclick="return confirm('¿Estás seguro de que deseas eliminar este barril?');">
                             <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
+=======
+                    <td th:text="${cliente.legajo}">Legajo</td>
+                    <td th:text="${cliente.nombre}">Nombre</td>
+                    <td th:text="${cliente.apellido}">Apellido</td>
+                    <td th:text="${cliente.dni}">DNI</td>
+                    <td th:text="${cliente.email}">Email</td>
+                    <td th:text="${cliente.tipo}">Tipo</td>
+                    <td th:text="${cliente.activo ? 'Activo' : 'Inactivo'}">Estado</td>
+                    <td>
+                        <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-info btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/clientes/{id}(id=${cliente.id})}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
                         </a>
                     </td>
                 </tr>

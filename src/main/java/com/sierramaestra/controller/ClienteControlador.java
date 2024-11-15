@@ -82,6 +82,7 @@ public class ClienteControlador {
     @PostMapping("/clientes/{id}")
     public String actualizarCliente(@PathVariable Long id, @ModelAttribute("cliente") Cliente cliente, Model model) {
     	Cliente clienteExistente = servicio.obtenerClientePorId(id);
+<<<<<<< HEAD
         clienteExistente.setNombre(cliente.getNombre());
         clienteExistente.setApellido(cliente.getApellido());
         clienteExistente.setEmail(cliente.getEmail());
@@ -90,6 +91,16 @@ public class ClienteControlador {
         clienteExistente.setTelefono(cliente.getTelefono());
         clienteExistente.setFechaRegistro(cliente.getFechaRegistro());
 
+=======
+    	clienteExistente.setId(id);
+    	clienteExistente.setLegajo(cliente.getLegajo());
+    	clienteExistente.setNombre(cliente.getNombre());
+    	clienteExistente.setApellido(cliente.getApellido());
+    	clienteExistente.setDni(cliente.getDni());
+    	clienteExistente.setEmail(cliente.getEmail());
+    	clienteExistente.setTipo(cliente.getTipo());
+    	clienteExistente.setActivo(cliente.isActivo());
+>>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
 
         servicio.actualizarCliente(clienteExistente);
         return "redirect:/clientes";
