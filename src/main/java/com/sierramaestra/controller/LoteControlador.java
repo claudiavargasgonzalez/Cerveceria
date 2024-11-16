@@ -1,8 +1,12 @@
 package com.sierramaestra.controller;
 
+import com.fasterxml.jackson.databind.deser.NullValueProvider;
 import com.sierramaestra.model.Lote;
 import com.sierramaestra.service.LoteServicio;
+
+import org.hibernate.boot.model.internal.Nullability;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.NullValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +47,10 @@ public class LoteControlador {
     }
 
     @PostMapping("/lote")
-    public String guardarLote(@ModelAttribute("lote") Lote lote) {
-        servicio.guardarLote(lote);
-        return "redirect:/lote";
+    public String guardarLote(@ModelAttribute("lote") Lote lote) throws Exception {
+    	if(servicio.guardarLote(lote) != null)
+    		return "redirect:/lote";
+    	return "redirect:/lote/nuevo";
     }
 
     @GetMapping("/lote/nuevo")

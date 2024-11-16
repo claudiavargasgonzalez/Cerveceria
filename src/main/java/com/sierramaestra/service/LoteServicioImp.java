@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sierramaestra.model.Lote;
 import com.sierramaestra.repository.LoteRepositorio;
+import com.sierramaestra.util.FechaUtil;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -29,8 +31,11 @@ public class LoteServicioImp implements LoteServicio {
     }
 
     @Override
-    public Lote guardarLote(Lote lote) {
-        return loteRepositorio.save(lote);
+    public Lote guardarLote(Lote lote) throws Exception {
+    	
+    	if(FechaUtil.comparacionFechaCreacionYFechaMadurador(lote.getFechaCarga(), lote.getFechaCargaMadurador()))
+    		return null;
+    	return loteRepositorio.save(lote);
     }
 
     @Override
