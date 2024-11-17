@@ -100,9 +100,10 @@ public class LoteControlador {
 
 
     @PostMapping("/lote")
-    public String guardarLote(@ModelAttribute("lote") Lote lote) {
-        servicio.guardarLote(lote);
-        return "redirect:/lote";
+    public String guardarLote(@ModelAttribute("lote") Lote lote) throws Exception {
+    	if(servicio.guardarLote(lote) != null)
+    		return "redirect:/lote";
+    	return "redirect:/lote/nuevo";
     }
 
     @GetMapping("/lote/nuevo")
