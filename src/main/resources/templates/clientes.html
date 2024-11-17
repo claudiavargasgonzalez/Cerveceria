@@ -62,7 +62,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
-                    <th>Legajo</th>
+                    <!--<th>Legajo</th>-->
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>DNI</th>
@@ -75,7 +75,7 @@
             <tbody>
                 <tr th:each="cliente : ${clientes}">
                     <td th:text="${cliente.id}">Id</td>
-                    <td th:text="${cliente.legajo}">Legajo</td>
+                    <!--<td th:text="${cliente.legajo}">Legajo</td>-->
                     <td th:text="${cliente.nombre}">Nombre</td>
                     <td th:text="${cliente.apellido}">Apellido</td>
                     <td th:text="${cliente.dni}">DNI</td>
