@@ -130,9 +130,10 @@ public class LoteControlador {
 =======
 >>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
     @PostMapping("/lote")
-    public String guardarLote(@ModelAttribute("lote") Lote lote) {
-        servicio.guardarLote(lote);
-        return "redirect:/lote";
+    public String guardarLote(@ModelAttribute("lote") Lote lote) throws Exception {
+    	if(servicio.guardarLote(lote) != null)
+    		return "redirect:/lote";
+    	return "redirect:/lote/nuevo";
     }
 
     @GetMapping("/lote/nuevo")
