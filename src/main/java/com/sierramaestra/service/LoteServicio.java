@@ -20,7 +20,7 @@ public interface LoteServicio {
 	    
 	    Page<Lote> listarTodosLosLotes(Pageable pageable);
 	    
-	    List<Lote> obtenerLotesActivosPorCerveza(Cerveza cerveza);
+	    List<Lote> obtenerLotesActivosPorCerveza(Cerveza cervezaId);
 	    
 	    double obtenerStockDisponible(Lote lote);
 	    

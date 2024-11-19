@@ -62,11 +62,20 @@ public class LoteServicioImp implements LoteServicio {
     public Page<Lote> listarTodosLosLotes(Pageable pageable) {
         return loteRepositorio.findAll(pageable);
     }
-
-	@Override
-	public List<Lote> obtenerLotesActivosPorCerveza(Cerveza cerveza) {
+    
+    @Override
+	public List<Lote> obtenerLotesActivosPorCerveza(Cerveza cervezaId) {
 		 // Obtener los lotes para una cerveza
-        List<Lote> lotes = loteRepositorio.findByCerveza(cerveza);
+        List<Lote> lotes = loteRepositorio.findByCerveza(cervezaId);
+        lotes.sort(Comparator.comparing(Lote::getFechaVencimiento));
+        return lotes;
+    }
+    
+    
+	/*@Override
+	public List<Lote> obtenerLotesActivosPorCerveza(Cerveza cervezaId) {
+		 // Obtener los lotes para una cerveza
+        List<Lote> lotes = loteRepositorio.findByCerveza(cervezaId);
         
         // Calcular los lotes activos
         List<Lote> lotesActivos = new ArrayList<>();
@@ -89,7 +98,7 @@ public class LoteServicioImp implements LoteServicio {
         lotesActivos.sort(Comparator.comparing(Lote::getFechaVencimiento));
 
         return lotesActivos;
-    }
+    }*/
     
 
 	@Override

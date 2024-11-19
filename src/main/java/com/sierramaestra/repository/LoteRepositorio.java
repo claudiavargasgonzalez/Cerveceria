@@ -10,6 +10,8 @@ import com.sierramaestra.model.Lote;
 
 @Repository
 public interface LoteRepositorio extends JpaRepository <Lote, Long>{
-	List<Lote> findByCerveza(Cerveza cerveza);
+	List<Lote> findByCerveza(Cerveza cervezaId);
+	List<Lote> findByCervezaO(Cerveza cervezaO);
+	
 	
 }
