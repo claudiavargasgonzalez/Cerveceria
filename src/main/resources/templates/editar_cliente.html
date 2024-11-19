@@ -36,7 +36,6 @@
                         <small class="form-text text-muted">Ingrese su legajo, máximo hasta 3 dígitos</small>
                     </div>
                   
-<<<<<<< HEAD
                 <!-- Campo Nombre con validaciones -->
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
@@ -89,56 +88,6 @@
                     <input type="date" name="fechaRegistro" th:field="*{fechaRegistro}" class="form-control" required>
                     <small class="form-text text-muted">Seleccione la fecha de registro</small>
                 </div>
-=======
-                    <!-- Campo Nombre con validaciones -->
-                    <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" th:field="*{nombre}" class="form-control"
-                        placeholder="Digite su nombre" pattern="[A-Za-z]+" maxlength="20" required>
-                        <small class="form-text text-muted">Solo letras permitidas (máximo 20 caracteres)</small>
-                    </div>
-
-                    <!-- Campo Apellido con validaciones -->
-                    <div class="form-group">
-                        <label for="apellido">Apellido:</label>
-                        <input type="text" name="apellido" th:field="*{apellido}" class="form-control" 
-                        placeholder="Digite su apellido" pattern="[A-Za-z\s]+" maxlength="20" required>
-                        <small class="form-text text-muted">Solo letras permitidas (máximo 20 caracteres)</small>
-                    </div>
-
-                    <!-- Campo DNI -->
-                    <div class="form-group">
-                        <label for="dni">DNI:</label>
-                        <input type="text" name="dni" th:field="*{dni}" class="form-control" 
-                        placeholder="Digite su DNI" pattern="^\d{8}$" maxlength="8" required>
-                        <small class="form-text text-muted">Debe tener exactamente 8 dígitos numéricos</small>
-                    </div>
- 
-                    <!-- Campo Email -->
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" th:field="*{email}" class="form-control" 
-                        placeholder="Digite su email" maxlength="50" required>
-                        <small class="form-text text-muted">Debe ser una dirección de email válida (máximo 50 caracteres)</small>
-                    </div>
-
-
-                    <<!-- Campo Rol -->
-                    <div class="form-group">
-                        <label for="tipo">Tipo:</label>
-                        <select name="tipo" th:field="*{tipo}" class="form-control" required>
-                            <option value="Consumidor Final">Consumidor Final</option>
-                            <option value="Empresa">Empresa</option>
-                            
-                        </select>
-                    </div>
-
-                  <!-- Checkbox Activo por defecto marcado -->
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" name="activo" th:field="*{activo}" checked>
-                        <label for="activo" class="form-check-label">Activo</label>
-                    </div>
->>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
 
                     <div class="form-group text-center">
                         <a th:href="@{/clientes}" class="btn btn-secondary">Volver</a>

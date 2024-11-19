@@ -11,7 +11,7 @@ public interface LoteServicio {
 	    
 	    Lote obtenerLotePorId(Long id);
 	    
-	    Lote guardarLote(Lote lote) throws Exception;
+	    Lote guardarLote(Lote lote);
 	    
 	    Lote actualizarLote(Lote lote);
 	    

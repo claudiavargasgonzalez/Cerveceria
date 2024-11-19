@@ -52,7 +52,7 @@ public class AccesorioControlador {
     public String crearAccesorioFormulario(Model modelo) {
     	Accesorio accesorio = new Accesorio();
         modelo.addAttribute("accesorio", accesorio);
-        modelo.addAttribute("estados", new String[]{"Alquilado","Devuelto", "Limpio", "Inactivo"});
+        modelo.addAttribute("estados", new String[]{"Alqulado","Devuelto", "Limpio", "Inactivo"});
         return "crear_accesorio";  // Asegúrate de que esta vista sea la correcta
     }
 

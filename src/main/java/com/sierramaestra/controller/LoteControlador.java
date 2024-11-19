@@ -1,10 +1,7 @@
 package com.sierramaestra.controller;
 
 import com.sierramaestra.model.Barril;
-<<<<<<< HEAD
 import com.sierramaestra.model.Cerveza;
-=======
->>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
 import com.sierramaestra.model.Lote;
 import com.sierramaestra.service.BarrileServicio;
 import com.sierramaestra.service.LoteServicio;
@@ -83,19 +80,14 @@ public class LoteControlador {
 
     @GetMapping("/lote/{id}")
     public String obtenerLotePorId(@PathVariable Long id, Model model) {
-<<<<<<< HEAD
         // Obtener el lote por su ID
         Lote lote = loteServicio.obtenerLotePorId(id);
-=======
-        Lote lote = servicio.obtenerLotePorId(id);
->>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
         if (lote == null) {
             model.addAttribute("error", "No se encontró un lote con el ID especificado.");
             return "error";
         }
 
         // Obtener barriles asociados al lote
-<<<<<<< HEAD
         List<Barril> barrilesCargados = barrilServicio.listarBarrilesPorLote(lote.getId());
 
         // Obtener barriles disponibles para asignar
@@ -111,29 +103,15 @@ public class LoteControlador {
         model.addAttribute("cervezasDisponibles", cervezasDisponibles);
 
         // Retornar la vista con los datos
-=======
-        List<Barril> barrilesCargados = barrileServicio.listarBarrilesPorLote(lote.getId());
-
-        // Obtener barriles disponibles para asignar
-        List<Barril> barrilesLimpios = barrileServicio.listarBarrilesPorEstado("Limpio");
-
-        model.addAttribute("lote", lote);
-        model.addAttribute("barrilesCargados", barrilesCargados);
-        model.addAttribute("barrilesLimpios", barrilesLimpios);
->>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
         return "show_lote";
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 004def38029f3e287e3637db4dcc0b1948d275cd
     @PostMapping("/lote")
-    public String guardarLote(@ModelAttribute("lote") Lote lote) throws Exception {
-    	if(servicio.guardarLote(lote) != null)
-    		return "redirect:/lote";
-    	return "redirect:/lote/nuevo";
+    public String guardarLote(@ModelAttribute("lote") Lote lote) {
+        servicio.guardarLote(lote);
+        return "redirect:/lote";
     }
 
     @GetMapping("/lote/nuevo")
