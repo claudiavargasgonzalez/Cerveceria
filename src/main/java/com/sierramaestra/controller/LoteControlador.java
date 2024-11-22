@@ -8,6 +8,7 @@ import com.sierramaestra.service.LoteServicio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class LoteControlador {
     @PostMapping("/lote/{id}/cargarBarriles")
     public String cargarBarrilesEnLote(
         @PathVariable("id") Long id,
-        @RequestParam("barrilesSeleccionados") List<Long> barrilesIds,
+        @RequestParam(name = "barrilesSeleccionados",defaultValue = "") List<Long> barrilesIds,
         Model modelo
     ) {
         // Obtener el lote
@@ -59,6 +60,15 @@ public class LoteControlador {
 
         if (barriles.isEmpty()) {
             modelo.addAttribute("error", "No se encontraron barriles válidos para asignar.");
+         // Obtener barriles asociados al lote
+            List<Barril> barrilesCargados = barrileServicio.listarBarrilesPorLote(lote.getId());
+
+            // Obtener barriles disponibles para asignar
+            List<Barril> barrilesLimpios = barrileServicio.listarBarrilesPorEstado("Limpio");
+
+            modelo.addAttribute("lote", lote);
+            modelo.addAttribute("barrilesCargados", barrilesCargados);
+            modelo.addAttribute("barrilesLimpios", barrilesLimpios);
             return "show_lote";
         }
 
@@ -111,7 +121,7 @@ public class LoteControlador {
         Lote lote = new Lote();
         modelo.addAttribute("lote", lote);
         modelo.addAttribute("estados", new String[]{"Activo"});
-        return "crear_lote";
+        return "redirect:/crear_lote";
     }
 
     @DeleteMapping("/{id}")
@@ -125,7 +135,7 @@ public class LoteControlador {
         Lote lote = servicio.obtenerLotePorId(id);
         modelo.addAttribute("lote", lote);
         modelo.addAttribute("estados", new String[]{"Activo", "Inactivo"}); // Añade los estados que necesites
-        return "editar_lote"; // Asegúrate de que esta es la vista correcta
+        return "redirect:/editar_lote"; // Asegúrate de que esta es la vista correcta
     }
 
     @PostMapping("/lote/editarLote/{id}")
@@ -146,7 +156,7 @@ public class LoteControlador {
         }
         modelo.addAttribute("currentPage", 0); // Valores por defecto
         modelo.addAttribute("totalPages", 1); // Valores por defecto
-        return "tabla_lote";
+        return "redirect:/tabla_lote";
     }
 
 }

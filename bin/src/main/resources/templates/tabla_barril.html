@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Listado de Barriles</title>
+    <link rel="stylesheet" href="/css/menu-principal.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 bg-opacity-75">
+
+    <!-- Header importado de menu-principal.html -->
+    <header>
+        <div class="logo">
+            <a href="/menu-principal">
+                <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra">
+            </a>
+        </div>
+        <h2></h2>
+        <nav>
+            <ul class="menu">
+                <li><a href="/cervezas">Cerveza</a></li>
+                <li><a href="#">Cliente</a></li>
+                <li><a href="/lote">Lote</a></li>
+                <li><a href="#">Pedidos</a></li>
+                <li><a href="#">Stock</a></li>
+                <li><a href="/usuarios">Usuarios</a></li>
+                <li><a href="/login">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Contenido principal de la página -->
+    <div class="container mx-auto p-6 max-w-full mt-12">
+        <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
+            <h1 class="text-2xl font-bold mb-4">Listado de Barriles</h1>
+            <div class="flex flex-col sm:flex-row justify-between mb-4">
+                <a th:href="@{/barril/nuevo}">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Barril</button>
+                </a>
+            </div>
+            <table class="w-full bg-white rounded-lg shadow-md">
+                <thead>
+                    <tr class="bg-gray-200 text-left text-xs sm:text-base">
+                        <th class="p-4">ID</th>
+                        <th class="p-4">Litros</th>
+                        <th class="p-4">Estado</th>
+                        <th class="p-4">Notas</th>
+                        <th class="p-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
+                        <td th:text="${barril.id}" class="p-4">1</td>
+                        <td th:text="${barril.litros}" class="p-4">123</td>
+                        <td th:text="${barril.estado}" class="p-4">456456</td>
+                        <td th:text="${barril.notas}" class="p-4">Cerveza</td>
+                        <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
+                            <a th:href="@{/barril/showBarril/{id}(id=${barril.id})}">
+                                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button>
+                            </a>
+                            <a th:href="@{/barril/editarBarril/{id}(id=${barril.id})}">
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
+                            </a>
+                            <a th:href="@{/barril/{id}(id=${barril.id})}">
+                                <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-4 flex justify-between">
+                <div th:if="${barrilesPage.hasPrevious()}">
+                    <a th:href="@{/barril(page=${barrilesPage.number - 1}, estado=${param.estado})}">
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
+                    </a>
+                </div>
+                <div th:if="${barrilesPage.hasNext()}">
+                    <a th:href="@{/barril(page=${barrilesPage.number + 1}, estado=${param.estado})}">
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    Página <span th:text="${barrilesPage.number + 1}">1</span> de <span th:text="${barrilesPage.totalPages}">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/menu-principal.js"></script>
+</body>
+
+</html>

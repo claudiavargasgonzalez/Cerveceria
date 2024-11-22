@@ -21,41 +21,29 @@
 
     <!-- Header importado de menu-principal.html -->
     <header>
-		<div class="logo">
-		    <a><img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra"></a>
+        <div class="logo">
+            <a href="/menu-principal">
+                <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra">
+            </a>
         </div>
         <h2></h2>
-		<nav>
-				    <ul class="menu">
-				        <li><a href="/cervezas">Cerveza</a></li>
-				        <li><a href="/clientes">Cliente</a></li>
-				        <!-- Dropdown Equipamiento -->
-				<li class="relative group"><a href="#" class="items-center">Equipamiento</a>
-					<!-- Submenú desplegable -->
-					<ul
-						class="absolute hidden group-hover:block bg-black shadow-lg rounded-md mt-1 w-32 py-2">
-						<li><a href="/barril"
-							class="block px-4 py-2 hover:bg-gray-200">Barril</a></li>
-						<li><a href="/madurador"
-							class="block px-4 py-2 hover:bg-gray-200">Madurador</a></li>
-						<li><a href="/accesorio"
-							class="block px-4 py-2 hover:bg-gray-200">Accesorios</a></li>
-					</ul></li>
-				        <li><a href="#">Pedidos</a></li>
-				         <li><a href="#">Stock</a></li>
-				      
-				        <li><a href="/usuarios">Usuarios</a></li>
-				        <li><a href="/login">Cerrar Sesión</a></li>
-				    </ul>
-				</nav>
+        <nav>
+            <ul class="menu">
+                <li><a href="/cervezas">Cerveza</a></li>
+                <li><a href="#">Cliente</a></li>
+                <li><a href="/barril">Barril</a></li>
+                <li><a href="#">Pedidos</a></li>
+                <li><a href="#">Stock</a></li>
+                <li><a href="/usuarios">Usuarios</a></li>
+                <li><a href="/login">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
         <div class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
-	
-	
 
     <!-- Contenido principal de la página -->
     <div class="container mx-auto p-6 max-w-full mt-12">
@@ -66,14 +54,6 @@
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Lote</button>
                 </a>
             </div>
-			
-			<div class="flex justify-between mb-4">				    
-				    <!-- Formulario de filtro por ID -->
-				    <form th:action="@{/lote/buscar}" method="get" class="flex items-center space-x-2">
-				        <input type="number" name="id" placeholder="Buscar por ID" class="px-2 py-1 border rounded-lg" required>
-				        <button type="submit" class="bg-green-500 text-white px-4 py-1 rounded-lg hover:bg-green-600">Buscar</button>
-				    </form>
-				</div>
             <table class="w-full bg-white rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-200 text-left text-xs sm:text-base">
