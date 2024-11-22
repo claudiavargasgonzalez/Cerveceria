@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
+
 import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
 
@@ -12,6 +13,4 @@ import com.sierramaestra.model.Lote;
 public interface LoteRepositorio extends JpaRepository <Lote, Long>{
 	List<Lote> findByCerveza(Cerveza cervezaId);
 	List<Lote> findByCervezaO(Cerveza cervezaO);
-	
-	
 }

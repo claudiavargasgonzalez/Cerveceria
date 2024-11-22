@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sierramaestra.dto.LoteCervezaDTO;
 import com.sierramaestra.model.Barril;
 import com.sierramaestra.model.Cerveza;
 import com.sierramaestra.model.Lote;
@@ -14,6 +16,7 @@ import com.sierramaestra.model.Madurador;
 import com.sierramaestra.repository.BarrilRepositorio;
 import com.sierramaestra.repository.LoteRepositorio;
 import com.sierramaestra.repository.MaduradorRepositorio;
+import com.sierramaestra.util.LoteUtils;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -114,6 +117,20 @@ public class LoteServicioImp implements LoteServicio {
 
         return stockBarriles + stockMaduradores;
     }
+	
+	public List<LoteCervezaDTO> returnLoteActivo(Cerveza cervezaID){
+		List<Lote> lotes= loteRepositorio.findByCerveza(cervezaID);
+		return LoteUtils.loteMapper(lotes, cervezaID); 
+	}
+	
+	
+	
+	/*public List<FlightDto> returnAllFlights(){
+        double dollarPrice = getDollar();
+        List <Flight> flights= repository.findAll();
+        return flightUtils.flightMapper(flights,dollarPrice);
+
+    }*/
 
 	
    

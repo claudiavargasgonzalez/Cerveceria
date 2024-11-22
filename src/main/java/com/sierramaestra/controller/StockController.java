@@ -41,7 +41,7 @@ public class StockController {
         }
         return "stockResultados";
     }*/
-    
+    //hacer get para buscarlote con dtos
     @GetMapping("/buscarLotes")
     public String buscarLotes(@RequestParam("cervezaId") Cerveza cervezaId, Model model) {
         List<Lote> lotes = loteServicio.obtenerLotesActivosPorCerveza(cervezaId);
