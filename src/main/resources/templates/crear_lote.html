@@ -21,7 +21,10 @@
                 <!-- Cerveza -->
                 <div class="mb-4">
                     <label for="cerveza" class="block text-sm font-medium text-gray-700">Cerveza:</label>
-                    <input type="text" id="cerveza" th:field="*{cerveza}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" placeholder="Nombre de la cerveza" required>
+                    <select id="cerveza" th:field="*{cerveza}" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 md:text-md" required>
+                        <option value="" disabled selected>Seleccione una cerveza</option>
+                        <option th:each="cerveza : ${cervezas}" th:value="${cerveza.id}" th:text="${cerveza.nombreCerveza}"></option>
+                    </select>
                 </div>
 
                 <!-- Cantidad Litros -->

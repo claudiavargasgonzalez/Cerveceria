@@ -1,6 +1,7 @@
 package com.sierramaestra.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.sierramaestra.repository.CervezaRepository;
 
 @Service
 public class CervezaServiceImpl implements CervezaService {
+
 	@Autowired
 	private CervezaRepository repositorio;
 
@@ -39,10 +41,13 @@ public class CervezaServiceImpl implements CervezaService {
 		
 	}
 
+	@Override
+    public List<Cerveza> listarCervezasDisponibles() {
+		return repositorio.findAll();
+    }
 
-	
-
-	
-	
-
+	@Override
+    public List<Cerveza> listarCervezas() {
+        return repositorio.findAll(); // Recupera todas las cervezas desde la base de datos
+    }
 }

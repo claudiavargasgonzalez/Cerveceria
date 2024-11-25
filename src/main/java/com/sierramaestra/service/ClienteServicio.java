@@ -20,5 +20,6 @@ public interface ClienteServicio {
     public long contarClientes(String id);  // Cambié 'legajo' a 'id'
 
     public List<Cliente> listarClientes(int page, int pageSize, String id);  // Cambié 'legajo' a 'id'
+    
 }
 

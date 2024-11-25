@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.sierramaestra.model.Barril;
 
 public interface BarrileServicio {
-List<Barril> listarTodosLosBarriles();
+    List<Barril> listarTodosLosBarriles();
     
     Barril guardarBarril(Barril barril);
     
@@ -27,4 +27,8 @@ List<Barril> listarTodosLosBarriles();
     List<Barril> listarBarrilesPorEstadoLimpio();
     
     List<Barril> listarBarrilesPorLote(Long loteId);
+
+    // Nuevo método
+    List<Barril> obtenerBarrilesLimpiosPorIds(List<Long> ids);  // Declaración del método
 }
+

@@ -7,7 +7,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface BarrilRepositorio extends JpaRepository<Barril, Long> {
+    
+    // Métodos existentes
     List<Barril> findByEstado(String estado);
+    
     Page<Barril> findByEstado(String estado, Pageable pageable);
+    
     List<Barril> findByLoteId(Long loteId);
+    
+    // Nuevo método agregado para encontrar barriles por ids y estado "Limpio"
+    List<Barril> findByIdInAndEstado(List<Long> ids, String estado);  // Asegúrate de agregar este método
 }
+
