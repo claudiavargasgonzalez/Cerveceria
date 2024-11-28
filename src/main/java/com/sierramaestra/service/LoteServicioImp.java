@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sierramaestra.dto.LoteCervezaDTO;
 import com.sierramaestra.model.Barril;
@@ -67,7 +68,7 @@ public class LoteServicioImp implements LoteServicio {
     }
     
     @Override
-	public List<Lote> obtenerLotesActivosPorCerveza(Cerveza cervezaId) {
+	public List<Lote> obtenerLotesActivosPorCerveza(Long cervezaId) {
 		 // Obtener los lotes para una cerveza
         List<Lote> lotes = loteRepositorio.findByCerveza(cervezaId);
         lotes.sort(Comparator.comparing(Lote::getFechaVencimiento));
@@ -118,9 +119,9 @@ public class LoteServicioImp implements LoteServicio {
         return stockBarriles + stockMaduradores;
     }
 	
-	public List<LoteCervezaDTO> returnLoteActivo(Cerveza cervezaID){
-		List<Lote> lotes= loteRepositorio.findByCerveza(cervezaID);
-		return LoteUtils.loteMapper(lotes, cervezaID); 
+	public List<LoteCervezaDTO> returnLoteActivo(Cerveza cervezaId){
+		List<Lote> lotes= loteRepositorio.findByCerveza(cervezaId.getId());
+		return LoteUtils.loteMapper(lotes, cervezaId); 
 	}
 	
 	

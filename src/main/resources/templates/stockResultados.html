@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <tr th:each="lote : ${lotes}">
-                    <td class="py-2 px-4 border-b" th:text="${lote.nombreCerveza}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${lote.cerveza}"></td>
                     <td class="py-2 px-4 border-b" th:text="${lote.cantidadLitros}"></td>
                     <td class="py-2 px-4 border-b" th:text="${lote.estado}"></td>
                     <td class="py-2 px-4 border-b" th:text="${#dates.format(lote.fechaVencimiento, 'dd/MM/yyyy')}"></td>
