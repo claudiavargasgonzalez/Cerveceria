@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Listado de Barriles</title>
+    <title>Listado de Fermentador</title>
     <link rel="stylesheet" href="/css/menu-principal.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -62,10 +62,10 @@
     <!-- Contenido principal de la página -->
     <div class="container mx-auto p-6 max-w-full mt-12">
         <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
-            <h1 class="text-2xl font-bold mb-4">Listado de Barriles</h1>
+            <h1 class="text-2xl font-bold mb-4">Listado de Fermentador</h1>
             <div class="flex flex-col sm:flex-row justify-between mb-4">
-                <a th:href="@{/barril/nuevo}">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Barril</button>
+                <a th:href="@{/fermentador/nuevo}">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Fermentador</button>
                 </a>
             </div>
             <table class="w-full bg-white rounded-lg shadow-md">
@@ -79,19 +79,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="barril : ${barrilesPage.content}" class="border-b text-sm sm:text-base">
-                        <td th:text="${barril.id}" class="p-4">1</td>
-                        <td th:text="${barril.litros}" class="p-4">123</td>
-                        <td th:text="${barril.estado}" class="p-4">456456</td>
-                        <td th:text="${barril.notas}" class="p-4">Cerveza</td>
+                    <tr th:each="fermentador : ${fermentadorPage.content}" class="border-b text-sm sm:text-base">
+                        <td th:text="${fermentador.id}" class="p-4">1</td>
+                        <td th:text="${fermentador.litros}" class="p-4">123</td>
+                        <td th:text="${fermentador.estado}" class="p-4">456456</td>
+                        <td th:text="${fermentador.notas}" class="p-4">Fermentación</td>
                         <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
-                            <a th:href="@{/barril/showBarril/{id}(id=${barril.id})}">
+                            <a th:href="@{/fermentador/showFermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button>
                             </a>
-                            <a th:href="@{/barril/editarBarril/{id}(id=${barril.id})}">
+                            <a th:href="@{/fermentador/editarFermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
                             </a>
-                            <a th:href="@{/barril/{id}(id=${barril.id})}">
+                            <a th:href="@{/fermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
                             </a>
                         </td>
@@ -100,18 +100,18 @@
             </table>
 
             <div class="mt-4 flex justify-between">
-                <div th:if="${barrilesPage.hasPrevious()}">
-                    <a th:href="@{/barril(page=${barrilesPage.number - 1}, estado=${param.estado})}">
+                <div th:if="${fermentadorPage.hasPrevious()}">
+                    <a th:href="@{/fermentador(page=${fermentadorPage.number - 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
                     </a>
                 </div>
-                <div th:if="${barrilesPage.hasNext()}">
-                    <a th:href="@{/barril(page=${barrilesPage.number + 1}, estado=${param.estado})}">
+                <div th:if="${fermentadorPage.hasNext()}">
+                    <a th:href="@{/fermentador(page=${fermentadorPage.number + 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
                     </a>
                 </div>
                 <div class="mt-2">
-                    Página <span th:text="${barrilesPage.number + 1}">1</span> de <span th:text="${barrilesPage.totalPages}">1</span>
+                    Página <span th:text="${fermentadorPage.number + 1}">1</span> de <span th:text="${fermentadorPage.totalPages}">1</span>
                 </div>
             </div>
         </div>
