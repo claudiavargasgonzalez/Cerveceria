@@ -22,7 +22,7 @@
     <!-- Header importado de menu-principal.html -->
     <header>
         <div class="logo">
-            <a href="#">
+            <a href="/menu-principal">
                 <img src="img/logo-sierra-maestra.jpg" alt="Logo Sierra Maestra">
             </a>
         </div>
@@ -42,6 +42,8 @@
 							class="block px-4 py-2 hover:bg-gray-200">Madurador</a></li>
 						<li><a href="/accesorio"
 							class="block px-4 py-2 hover:bg-gray-200">Accesorios</a></li>
+							<li><a href="/fermentador"
+							class="block px-4 py-2 hover:bg-gray-200">Fermentador</a></li>
 					</ul></li>
 				        <li><a href="#">Pedidos</a></li>
 				         <li><a href="#">Stock</a></li>
@@ -102,7 +104,7 @@
 						<td th:text="${#dates.format(lote.fechaCargaMadurador, 'yyyy-MM-dd')}" class="p-4">2025-10-05</td>
                         <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
                             <a th:href="@{/lote/{id}(id=${lote.id})}">
-                                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Cargar barril</button>
+                                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Cargar</button>
                             </a>
 							<a th:href="@{/lote/editarLote/{id}(id=${lote.id})}">
 							    <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>

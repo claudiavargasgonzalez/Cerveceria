@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Listado de Madurador</title>
+    <title>Listado de Fermentador</title>
     <link rel="stylesheet" href="/css/menu-principal.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,7 +31,7 @@
             <ul class="menu">
                 <li><a href="/cervezas">Cerveza</a></li>
                 <li><a href="/clientes">Cliente</a></li>
-                 <!-- Dropdown Equipamiento -->
+                <!-- Dropdown Equipamiento -->
 				<li class="relative group"><a href="#" class="items-center">Equipamiento</a>
 					<!-- Submenú desplegable -->
 					<ul
@@ -62,10 +62,10 @@
     <!-- Contenido principal de la página -->
     <div class="container mx-auto p-6 max-w-full mt-12">
         <div class="bg-white p-6 rounded-lg shadow-md max-w-full overflow-x-auto">
-            <h1 class="text-2xl font-bold mb-4">Listado de Madurador</h1>
+            <h1 class="text-2xl font-bold mb-4">Listado de Fermentador</h1>
             <div class="flex flex-col sm:flex-row justify-between mb-4">
-                <a th:href="@{/madurador/nuevo}">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Madurador</button>
+                <a th:href="@{/fermentador/nuevo}">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mb-2 sm:mb-0">Añadir Fermentador</button>
                 </a>
             </div>
             <table class="w-full bg-white rounded-lg shadow-md">
@@ -79,19 +79,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="madurador : ${maduradorPage.content}" class="border-b text-sm sm:text-base">
-                        <td th:text="${madurador.id}" class="p-4">1</td>
-                        <td th:text="${madurador.litros}" class="p-4">123</td>
-                        <td th:text="${madurador.estado}" class="p-4">456456</td>
-                        <td th:text="${madurador.notas}" class="p-4">Cerveza</td>
+                    <tr th:each="fermentador : ${fermentadorPage.content}" class="border-b text-sm sm:text-base">
+                        <td th:text="${fermentador.id}" class="p-4">1</td>
+                        <td th:text="${fermentador.litros}" class="p-4">123</td>
+                        <td th:text="${fermentador.estado}" class="p-4">456456</td>
+                        <td th:text="${fermentador.notas}" class="p-4">Fermentación</td>
                         <td class="p-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
-                            <a th:href="@{/madurador/showMadurador/{id}(id=${madurador.id})}">
+                            <a th:href="@{/fermentador/showFermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">Show</button>
                             </a>
-                            <a th:href="@{/madurador/editarMadurador/{id}(id=${madurador.id})}">
+                            <a th:href="@{/fermentador/editarFermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600">Editar</button>
                             </a>
-                            <a th:href="@{/madurador/{id}(id=${madurador.id})}">
+                            <a th:href="@{/fermentador/{id}(id=${fermentador.id})}">
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
                             </a>
                         </td>
@@ -100,18 +100,18 @@
             </table>
 
             <div class="mt-4 flex justify-between">
-                <div th:if="${maduradorPage.hasPrevious()}">
-                    <a th:href="@{/madurador(page=${maduradorPage.number - 1}, estado=${param.estado})}">
+                <div th:if="${fermentadorPage.hasPrevious()}">
+                    <a th:href="@{/fermentador(page=${fermentadorPage.number - 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Anterior</button>
                     </a>
                 </div>
-                <div th:if="${maduradorPage.hasNext()}">
-                    <a th:href="@{/madurador(page=${maduradorPage.number + 1}, estado=${param.estado})}">
+                <div th:if="${fermentadorPage.hasNext()}">
+                    <a th:href="@{/fermentador(page=${fermentadorPage.number + 1}, estado=${param.estado})}">
                         <button class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400">Siguiente</button>
                     </a>
                 </div>
                 <div class="mt-2">
-                    Página <span th:text="${maduradorPage.number + 1}">1</span> de <span th:text="${maduradorPage.totalPages}">1</span>
+                    Página <span th:text="${fermentadorPage.number + 1}">1</span> de <span th:text="${fermentadorPage.totalPages}">1</span>
                 </div>
             </div>
         </div>
